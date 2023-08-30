@@ -1,4 +1,6 @@
 <template>
+  <customNavBar></customNavBar>
+  <iceSwiper></iceSwiper>
   <view class="content">
     <text>当前登录用户信息:</text>
     <text>
@@ -19,6 +21,8 @@
 import {useMemberStore} from "@/stores";
 import {ref} from 'vue'
 import api from "@/utils/api";
+import CustomNavBar from "@/pages/index/components/customNavBar.vue";
+import IceSwiper from "@/components/common/iceSwiper.vue";
 
 const memberStore = useMemberStore()
 

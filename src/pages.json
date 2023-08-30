@@ -2,7 +2,9 @@
   "easycom": {
     "autoscan": true,
     "custom": {
-      "^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue"
+      "^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue",
+      // 以ice组件开头的,在components文件夹下查找
+      "^ice-(.*)": "@/components/ice$1.vue"
     }
   },
   "pages": [
@@ -10,6 +12,7 @@
       "path": "pages/index/index",
       "style": {
         "navigationBarTitleText": "首页",
+        // 隐藏导航栏
         "navigationStyle": "custom"
       }
     },

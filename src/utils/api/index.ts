@@ -24,14 +24,42 @@ const httpInterceptor = {
 uni.addInterceptor('request', httpInterceptor)
 uni.addInterceptor('uploadFile', httpInterceptor)
 
-export const http = (options: UniApp.RequestOptions) => {
-    return new Promise((resolve, reject) => {
+type Data<T> = {
+    code: string
+    msg: string
+    result: T
+    message: string
+}
+
+export const http = <T>(options: UniApp.RequestOptions) => {
+    return new Promise<Data<T>>((resolve, reject) => {
         uni.request({
             ...options,
+            // 只代表响应成功,并没有判断状态码
             success: (res) => {
-                resolve(res)
+                if (res.statusCode >= 200 && res.statusCode < 300) {
+                    resolve(res.data as Data<T>)
+                } else if (res.statusCode === 401) {
+                    // 401错误,清理用户信息,重定向到登录
+                    const memberStore = useMemberStore()
+                    memberStore.clearProfile()
+                    uni.navigateTo({url: '/pages/login/index'})
+                    reject(res)
+                } else {
+                    uni.showToast({
+                        icon: 'none',
+                        title: (res.data as Data<T>).message || '请求错误'
+                    })
+                    reject(res)
+                }
             },
-
+            fail: (err) => {
+                uni.showToast({
+                    icon: 'none',
+                    title: '网络错误,换个网络试试'
+                })
+                reject(err)
+            }
         })
     })
 }

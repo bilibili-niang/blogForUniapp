@@ -1,60 +1,62 @@
 <template>
   <view class="content">
-    <navBar title="首页"></navBar>
-    <view class="context">
-      <view class="roundText">
-        <navigator url="../manualClean/index">人工保洁</navigator>
-      </view>
-      <view class="roundText">
-        <navigator url="../machineClean/index">机械化作业</navigator>
-      </view>
-    </view>
-
+    <text>当前登录用户信息:</text>
+    <text>
+      {{ memberStore.profile }}
+    </text>
+    <button @tap="memberStore.setProfile({
+    nickname:'测试用户名',
+    token:'1234567890'
+    })">set token
+    </button>
+    <button @tap="memberStore.clearProfile()">清空</button>
+    <button @tap="requestTest">请求</button>
+    <button @tap="requestTestFail">失败请求</button>
   </view>
 </template>
 
-<script>
-import NavBar from '@/components/common/navBar.vue'
+<script setup lang="ts">
+import {useMemberStore} from "@/stores";
+import {ref} from 'vue'
+import api from "@/utils/api";
 
-export default {
-  components: { NavBar },
-  data () {
-    return {}
-  },
-  onLoad () {
+const memberStore = useMemberStore()
 
-  },
-  methods: {}
+const title = ref('Hello')
+/**
+ * 获取首页数据
+ */
+const requestTest = async () => {
+  const res = await api.home()
+  console.log(res)
+}
+const requestTestFail = async () => {
+  const res = await api.homeFail()
+  if (res.success) {
+    console.log(res)
+  } else {
+    console.log('fail')
+  }
 }
 </script>
 
-<style lang="less">
-.flex-row(@direction: row) {
+<style scoped lang="less">
+.content {
   display: flex;
-  flex-direction: @direction;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
-.content {
-  .flex-row(column);
+.text-area {
+  display: flex;
+  justify-content: center;
 
-  .context {
-    .flex-row(column);
-    width: 100%;
-    padding-top: 25vh;
+}
 
-    .roundText {
-      margin-top: 100rpx;
-      .flex-row();
-      justify-content: center;
-      align-items: center;
-      height: 100rpx;
-      padding: 10rpx;
-      width: 90%;
-      margin-left: 5%;
-      margin-right: 5%;
-      border-radius: 10rpx;
-      border: 1px solid rgba(0, 0, 0, .4);
-    }
-  }
+.title {
+  font-size: 36rpx;
+  color: #8f8f94;
 }
 </style>

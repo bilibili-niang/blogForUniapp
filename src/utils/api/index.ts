@@ -1,6 +1,3 @@
-// @ts-ignore
-// @ts-ignore
-
 import {useMemberStore} from "@/stores";
 import home from "./home";
 

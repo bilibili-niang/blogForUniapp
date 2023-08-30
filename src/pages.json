@@ -7,11 +7,41 @@
   },
   "pages": [
     {
+      "path": "pages/login/index",
+      "style": {
+        "navigationBarTitleText": "登录",
+        "navigationStyle": "custom"
+      }
+    },
+    {
       "path": "pages/index/index",
+      "style": {
+        "navigationBarTitleText": "首页",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/manualClean/index",
+      "style": {
+        "navigationBarTitleText": "人工保洁任务",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/machineClean/index",
+      "style": {
+        "navigationBarTitleText": "机械化作业任务",
+        //设置不显示原生导航栏
+        "navigationStyle": "custom"
+      }
+    }
+    /*,
+    {
+      "path": "index2",
       "style": {
         "navigationBarTitleText": "uni-app"
       }
-    }
+    }*/
   ],
   "globalStyle": {
     "navigationBarTextStyle": "black",

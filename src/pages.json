@@ -11,6 +11,24 @@
       "style": {
         "navigationBarTitleText": "uni-app"
       }
+    },
+    {
+      "path": "pages/machineClean/index",
+      "style": {
+        "navigationBarTitleText": "uni-app"
+      }
+    },
+    {
+      "path": "pages/manualClean/index",
+      "style": {
+        "navigationBarTitleText": "uni-app"
+      }
+    },
+    {
+      "path": "pages/login/index",
+      "style": {
+        "navigationBarTitleText": "uni-app"
+      }
     }
   ],
   "globalStyle": {

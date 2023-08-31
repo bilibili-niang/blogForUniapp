@@ -1,55 +1,38 @@
 <template>
   <view class="content">
-    <view class="text-area">
-      <text class="title">{{ title }}</text>
+    <view class="title">
+      环卫巡查端
     </view>
-    <uni-card title="用户信息" extra="额外信息">
-      <text>
-        {{ memberStore.profile }}
-      </text>
-    </uni-card>
-    <button @tap="memberStore.setProfile({
-    nickname:'测试用户名'
-    })">点击一下</button>
-    <button @tap="memberStore.clearProfile()">清空</button>
+    <view class="formControl">
+      <view class="forInputItem">
+        <view class="formTitle">
+          账号
+        </view>
+        <uni-easyinput class="uni-mt-5" trim="all" v-model="accountVal" placeholder="请输入账号"></uni-easyinput>
+      </view>
+
+      <view class="forInputItem">
+        <view class="formTitle">
+          密码
+        </view>
+        <uni-easyinput class="uni-mt-5" trim="all" v-model="passwordVal" placeholder="请输入密码"></uni-easyinput>
+      </view>
+    </view>
   </view>
 </template>
 
 <script setup lang="ts">
 import {useMemberStore} from "@/stores";
+import {ref} from "vue";
 
-const memberStore=useMemberStore()
+const memberStore = useMemberStore()
 
-import {ref} from 'vue'
+let accountVal = ref('')
+let passwordVal = ref('')
 
-const title = ref('Hello')
+
 </script>
 
-<style scoped>
-.content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
+<style scoped lang="less">
 
-.logo {
-  height: 200rpx;
-  width: 200rpx;
-  margin-top: 200rpx;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 50rpx;
-}
-
-.text-area {
-  display: flex;
-  justify-content: center;
-
-}
-
-.title {
-  font-size: 36rpx;
-  color: #8f8f94;
-}
 </style>

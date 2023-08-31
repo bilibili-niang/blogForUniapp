@@ -9,19 +9,25 @@
     {
       "path": "pages/index/index",
       "style": {
-        "navigationBarTitleText": "首页"
+        "navigationBarTitleText": "首页",
+        // 隐藏导航栏
+        "navigationStyle": "custom"
       }
     },
     {
       "path": "pages/machineClean/index",
       "style": {
-        "navigationBarTitleText": "uni-app"
+        "navigationBarTitleText": "机械化作业任务",
+        // 隐藏导航栏
+        "navigationStyle": "custom"
       }
     },
     {
       "path": "pages/manualClean/index",
       "style": {
-        "navigationBarTitleText": "uni-app"
+        "navigationBarTitleText": "人工保洁任务",
+        // 隐藏导航栏
+        "navigationStyle": "custom"
       }
     },
     {

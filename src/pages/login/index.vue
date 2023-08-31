@@ -1,6 +1,5 @@
 <template>
   <view class="login">
-
     <view class="title">
       环卫巡查端
     </view>
@@ -31,5 +30,10 @@ let passwordVal = ref('')
 </script>
 
 <style scoped lang="less">
+.login{
+  .title{
+    
+  }
+}
 
 </style>

@@ -109,8 +109,8 @@
 </template>
 
 <script>
-import NormalCard from '@/components/machineClean/normalCard.vue'
-import NavBar from '@/components/common/navBar.vue'
+import NormalCard from './components/normalCard.vue'
+import NavBar from "@/pages/index/components/navBar.vue";
 
 export default {
   name: "index",
@@ -183,18 +183,12 @@ export default {
 </script>
 
 <style scoped lang="less">
-.flex-row(@direction:row) {
-  display: flex;
-  flex-direction: @direction;
-}
-
 .manualClean {
   .flex-row(column);
 
   .selections {
     margin-top: 20rpx;
-    padding-left: 20rpx;
-    padding-right: 20rpx;
+    .padding-lr-20();
     .flex-row(column);
 
     .selectionOneRow, .selectionTwoRow {

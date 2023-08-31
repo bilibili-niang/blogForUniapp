@@ -25,7 +25,7 @@
               @change="change"
           ></uni-data-select>
         </view>
-        <button class="operator button">确认</button>
+        <button class="operator mainBtn">确认</button>
       </view>
     </view>
 
@@ -59,41 +59,43 @@
     </view>
 
     <view class="actived" v-show="activeId">
-      <normalCard cardType="normal" :item="activeData" v-if="activeData"></normalCard>
-      <view class="formControl">
+      <view class="contentLim">
+        <normalCard cardType="normal" :item="activeData" v-if="activeData"></normalCard>
+        <view class="formControl">
 
-        <view class="form">
-          <uni-table border stripe emptyText="暂无更多数据">
-            <!-- 表头行 -->
-            <uni-tr>
-              <uni-th width="120">考核项</uni-th>
-              <uni-th>评分</uni-th>
-            </uni-tr>
-            <!-- 表格数据行 -->
-            <uni-tr>
-              <uni-td>首扫及速度</uni-td>
-              <uni-td>score</uni-td>
-            </uni-tr>
-            <uni-tr>
-              <uni-td>卫生死角</uni-td>
-              <uni-td></uni-td>
-            </uni-tr>
-            <uni-tr>
-              <uni-td>着装</uni-td>
-              <uni-td></uni-td>
-            </uni-tr>
-            <uni-tr>
-              <uni-td>离岗</uni-td>
-              <uni-td></uni-td>
-            </uni-tr>
+          <view class="form">
+            <uni-table border stripe emptyText="暂无更多数据">
+              <!-- 表头行 -->
+              <uni-tr>
+                <uni-th width="120">考核项</uni-th>
+                <uni-th>评分</uni-th>
+              </uni-tr>
+              <!-- 表格数据行 -->
+              <uni-tr>
+                <uni-td>首扫及速度</uni-td>
+                <uni-td>score</uni-td>
+              </uni-tr>
+              <uni-tr>
+                <uni-td>卫生死角</uni-td>
+                <uni-td></uni-td>
+              </uni-tr>
+              <uni-tr>
+                <uni-td>着装</uni-td>
+                <uni-td></uni-td>
+              </uni-tr>
+              <uni-tr>
+                <uni-td>离岗</uni-td>
+                <uni-td></uni-td>
+              </uni-tr>
 
-          </uni-table>
+            </uni-table>
+          </view>
         </view>
-      </view>
 
-      <view class="btns">
-        <button class="button" @tap="activeId=''">取消</button>
-        <button class="button" @tap="activeId=''">确定</button>
+        <view class="btns">
+          <button class="mainBtn" @tap="activeId=''">取消</button>
+          <button class="mainBtn" @tap="activeId=''">确定</button>
+        </view>
       </view>
     </view>
 
@@ -101,8 +103,8 @@
 </template>
 
 <script>
-import NormalCard from '../../components/manualClean/normalCard.vue'
-import NavBar from '@/components/common/navBar.vue'
+import NormalCard from './components/normalCard.vue'
+import NavBar from '../index/components/navBar.vue'
 
 export default {
   name: "index",
@@ -179,18 +181,12 @@ export default {
 </script>
 
 <style scoped lang="less">
-.flex-row(@direction:row) {
-  display: flex;
-  flex-direction: @direction;
-}
-
 .manualClean {
   .flex-row(column);
 
   .selections {
     margin-top: 20rpx;
-    padding-left: 20rpx;
-    padding-right: 20rpx;
+    .padding-lr-20();
     .flex-row(column);
 
     .selectionOneRow, .selectionTwoRow {
@@ -205,54 +201,66 @@ export default {
   .selectionOneRow {
     height: 70rpx;
 
-    text {
+    text:nth-child(1) {
       border: 1px solid rgba(0, 0, 0, .3);
-      display: flex;
+      width: 42vw;
+    }
+
+    text:nth-child(2) {
       width: 30vw;
+      max-width: 30vw;
+    }
+
+    .selector {
+      max-width: 25vw;
+    }
+
+    text {
       align-items: center;
-      justify-content: center;
+      display: flex;
+      justify-content: flex-start;
+      padding-left: @padding-m;
     }
 
   }
 
   .selectionTwoRow {
-    margin-top: 10rpx;
+    margin-top: @margin-l;
 
     /deep/ .selector {
       margin-left: 10rpx;
       margin-right: 10rpx;
-      width: 30vw;
+      width: 25vw;
+      max-width: 25vw;
     }
 
     .timePicker {
       display: flex;
-      width: 30vw;
+      width: 43vw;
+      max-width: 43vw;
 
-      .uni-date-editor {
-        width: 30vw;
-      }
-
-      /deep/ .timePicker {
-
+      /deep/ .uni-date-editor {
+        width: 100%;
       }
     }
 
     .operator {
-      width: 15vw;
-      font-size: 25rpx;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      width: 25vw;
+
+      .mainBtn {
+        width: 100%;
+      }
+
+      max-width: 25vw;
     }
   }
 
   .valDescriptions {
-    padding-left: 20rpx;
-    padding-right: 20rpx;
+    .padding-lr-20();
     .flex-row();
     flex-wrap: nowrap;
     justify-content: flex-start;
-    margin-top: 20rpx;
+    margin-top: @margin-ls;
 
     .item {
       .flex-row();
@@ -275,22 +283,18 @@ export default {
       background: rgb(242, 138, 129);
     }
   }
-
-  .operator {
-    button {
-      font-size: 25rpx;
-    }
-  }
 }
 
 
 .actived {
-  border: 1px solid rgba(0, 0, 0, .5);
   margin-top: 30rpx;
   padding-top: 0;
-  width: 85%;
-  margin-left: auto;
-  margin-right: auto;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+
+  .contentLim {
+    .theme-border();
+  }
 
   .form {
     width: 90%;
@@ -303,10 +307,6 @@ export default {
     margin-top: 20rpx;
     margin-bottom: 20rpx;
 
-    /deep/ .button {
-      font-size: 25rpx;
-      border-color: rgba(0, 0, 0, .8);
-    }
   }
 }
 

@@ -14,6 +14,7 @@ export const useMemberStore = defineStore(
         }
         // 清理会员信息，退出时使用
         const clearProfile = () => {
+            uni.clearStorage()
             profile.value = undefined
         }
         // 记得 return

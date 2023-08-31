@@ -1,5 +1,6 @@
 import {useMemberStore} from "@/stores";
 import home from "./home";
+import auth from "./auth";
 
 export const baseUrl: String = `https://blog.icestone.work`;
 
@@ -13,7 +14,7 @@ const httpInterceptor = {
         }
         // 添加token:
         const memberStore = useMemberStore()
-        const token = memberStore.profile?.token
+        const token = memberStore.profile?.Token
         if (token) {
             options.header.Authorization = token
         }
@@ -29,6 +30,9 @@ type Data<T> = {
     msg: string
     result: T
     message: string
+    success: boolean
+    Name: string
+    Token: string
 }
 
 export const http = <T>(options: UniApp.RequestOptions) => {
@@ -38,14 +42,17 @@ export const http = <T>(options: UniApp.RequestOptions) => {
             // 只代表响应成功,并没有判断状态码
             success: (res) => {
                 if (res.statusCode >= 200 && res.statusCode < 300) {
+                    (res.data as Data<T>).success = true
                     resolve(res.data as Data<T>)
                 } else if (res.statusCode === 401) {
+                    (res.data as Data<T>).success = false
                     // 401错误,清理用户信息,重定向到登录
                     const memberStore = useMemberStore()
                     memberStore.clearProfile()
                     uni.navigateTo({url: '/pages/login/index'})
                     reject(res)
                 } else {
+                    (res.data as Data<T>).success = false
                     uni.showToast({
                         icon: 'none',
                         title: (res.data as Data<T>).message || '请求错误'
@@ -65,5 +72,6 @@ export const http = <T>(options: UniApp.RequestOptions) => {
 }
 export default {
     baseUrl,
-    ...home
+    ...home,
+    ...auth
 }

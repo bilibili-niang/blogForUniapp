@@ -9,35 +9,37 @@
       </text>
     </uni-card>
     <button @tap="memberStore.setProfile({
-    nickname:'测试用户名',
-    token:'1234567890'
-    })">set token</button>
+    nickname:'测试用户名'
+    })">点击一下</button>
     <button @tap="memberStore.clearProfile()">清空</button>
-    <button @tap="requestTest">请求</button>
   </view>
 </template>
 
 <script setup lang="ts">
 import {useMemberStore} from "@/stores";
-import {ref} from 'vue'
-import api from "@/utils/api";
 
-const memberStore = useMemberStore()
+const memberStore=useMemberStore()
+
+import {ref} from 'vue'
 
 const title = ref('Hello')
-const requestTest = async () => {
-  const res = await api.home()
-  console.log(res)
-}
 </script>
 
 <style scoped>
 .content {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
+}
+
+.logo {
+  height: 200rpx;
+  width: 200rpx;
+  margin-top: 200rpx;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 50rpx;
 }
 
 .text-area {

@@ -29,8 +29,8 @@ const durationChange: UniHelper.SwiperOnChange = (event) => {
   console.log(event.detail?.current)
   // 非空断言,表示detail不可能为空
   console.log(event.detail!.current)
-
 }
+
 
 </script>
 

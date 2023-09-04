@@ -10,17 +10,7 @@
     "disableHostCheck": true,
     "devServer": {
       "logLevel": "debug",
-      "proxy": {
-        /*"/api": {
-          "pathRewrite": {
-            //路径重写
-            "^/api": ""
-            //选择忽略拦截器里面的单词
-          },
-          "target": "https://blog.icestone.work",
-          "changeOrigin": true
-        }*/
-      },
+      "proxy": {},
       "port": "8081"
     }
   },

@@ -1,7 +1,12 @@
 import {useMemberStore} from "@/stores";
 import home from "./home";
+import type {Data} from "@/types/data";
 
+// 服务器开发
 export const baseUrl: String = `https://blog.icestone.work`;
+
+// 本地开发
+// export const baseUrl: String = `http://localhost:89`;
 
 // 添加拦截器
 const httpInterceptor = {
@@ -24,14 +29,13 @@ const httpInterceptor = {
 uni.addInterceptor('request', httpInterceptor)
 uni.addInterceptor('uploadFile', httpInterceptor)
 
-type Data<T> = {
-    code: string
-    msg: string
-    result: T
-    message: string
-}
 
 export const http = <T>(options: UniApp.RequestOptions) => {
+    // @date 2023/9/5 @time 10:35 , @author 张嘉凯
+    // TODO 微信小程序开发把下面的配置打开
+    // @ts-ignore
+    options.url = options.url.replace('/api', baseUrl)
+
     return new Promise<Data<T>>((resolve, reject) => {
         uni.request({
             ...options,

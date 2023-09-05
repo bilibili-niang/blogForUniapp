@@ -24,27 +24,19 @@
       }
     },
     {
-      "path": "pages/manualClean/index",
+      "path": "pages/about/index",
       "style": {
-        "navigationBarTitleText": "人工保洁任务",
-        "navigationStyle": "custom"
+        "navigationBarTitleText": "关于此tag",
+        "enablePullDownRefresh": true
       }
     },
     {
-      "path": "pages/machineClean/index",
+      "path": "pages/read/index",
       "style": {
-        "navigationBarTitleText": "机械化作业任务",
-        //设置不显示原生导航栏
-        "navigationStyle": "custom"
+        "navigationBarTitleText": "阅读",
+        "enablePullDownRefresh": true
       }
     }
-    /*,
-    {
-      "path": "index2",
-      "style": {
-        "navigationBarTitleText": "uni-app"
-      }
-    }*/
   ],
   "globalStyle": {
     "navigationBarTextStyle": "black",

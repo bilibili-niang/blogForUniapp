@@ -5,13 +5,10 @@
         <view class="tag">
           <uni-tag :inverted="true" text="title" type="primary"/>
         </view>
-        <!--        <view class="btn">-->
         <button size="mini">
           {{ item.title }}
         </button>
-        <!--        </view>-->
       </view>
-      <!--      {{ item }}-->
     </view>
 
   </view>

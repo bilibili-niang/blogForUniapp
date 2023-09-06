@@ -12,6 +12,5 @@ onHide(() => {
 });
 </script>
 <style lang="less">
-//@import'@/static/css/variable.less';
-//@import'@/static/css/common.less';
+
 </style>

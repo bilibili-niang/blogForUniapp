@@ -1,6 +1,6 @@
 <template>
   <view class="iceSwiper">
-    <swiper class="swiper" circular :indicator-dots="indicatorDots" :autoplay="true" interval="2000"
+    <swiper class="swiper" circular :indicator-dots="indicatorDots" :autoplay="true" interval="3000"
             duration="1500"
             @change="durationChange"
     >

@@ -2,7 +2,7 @@
   <!--tag的关于页面-->
   <view class="about">
     <view class="title">
-      关于:
+      关于
       <uni-tag :inverted="true" :text="tag" type="primary"/>
       的文章:
     </view>
@@ -10,15 +10,15 @@
     <view class="context">
       <view v-if="data">
         <view class="itemLim" v-for="(item,index) in data" :key="index">
-          <view class="cover" :style="{
-        'background':`url(https://blog.icestone.work${item.headImg})`
-      }"></view>
+          <!--<view class="cover" :style="{
+                  'background':`url(https://blog.icestone.work${item.headImg})`
+                }"></view>-->
           <view class="item">
-            <uni-tag :inverted="true" :text="item.id+''" type="primary"/>
+            <!--<uni-tag :inverted="true" :text="item.id+''" type="primary"/>-->
             <uni-tag :inverted="true" :text="item.title" type="primary"/>
           </view>
           <view class="des">
-            {{ item.description }}
+            {{ item.description ? item.description : '-' }}
           </view>
           <view class="operate">
             <button @tap="goToRead(item.id)" size="mini">read</button>
@@ -27,7 +27,7 @@
         </view>
       </view>
     </view>
-    <!--    data:{{ data }}-->
+    <!--data:{{ data }}-->
   </view>
 </template>
 
@@ -48,6 +48,7 @@ const init = async () => {
   // 这里tag只有一个
   const res = await api.aboutTags({tags: [tag.value]})
   data.value = res.result
+  console.log('data.value--->')
   console.log(data.value)
   uni.stopPullDownRefresh();
 }
@@ -73,6 +74,7 @@ nextTick(() => {
 <style scoped lang="less">
 .about {
   .padding-lr-20();
+  padding-top: @padding-m;
 
   .context {
     .itemLim {
@@ -81,7 +83,7 @@ nextTick(() => {
       border-radius: @radio-ls;
       padding: @padding-s;
       position: relative;
-      background: @bacColor-bleak;
+      background: linear-gradient(to right bottom, rgba(255, 255, 255, 0) 50%, @bacColor-bleak);
 
       .cover {
         position: absolute;
@@ -100,6 +102,10 @@ nextTick(() => {
         margin-top: @margin-s;
         justify-content: space-between;
         margin-bottom: @margin-l;
+      }
+
+      .des {
+        font-size: @font-m;
       }
 
       .operate {

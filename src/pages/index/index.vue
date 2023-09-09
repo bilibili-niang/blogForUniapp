@@ -2,17 +2,15 @@
   <customNavBar :back="false" title="首页"></customNavBar>
   <iceSwiper :list="loopItem" @index="getIndex"></iceSwiper>
   <view class="container">
-    <recommendMarkdown :list="loopItem"></recommendMarkdown>
+    <recommendMarkdown :list="loopItem" :activeIndex="activeIndex"></recommendMarkdown>
     <!--分类-->
     <classify :item="classifyItem"></classify>
 
     <view class="content">
-
       <markdownCon :item="randomOne"></markdownCon>
-
     </view>
-
   </view>
+  <tabBar/>
 </template>
 
 <script setup lang="ts">
@@ -25,8 +23,10 @@ import Classify from "@/pages/index/components/classify.vue";
 import MarkdownCon from "@/components/common/markdownCon.vue";
 
 let loopItem = ref<any>([])
+const activeIndex = ref(0)
 const getIndex = (id: number) => {
   // console.log(`前激活id: ${id}`)
+  activeIndex.value = id
 }
 // 首页推荐列表
 const recommendList = ref([])

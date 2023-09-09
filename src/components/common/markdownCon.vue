@@ -1,10 +1,15 @@
 <template>
   <!--  markdown文章预览并渲染-->
-  <view class="markdownCOn">
+  <view class="markdownCon">
     <view class="MarkdownDetail">
-      <view class="item title">{{ item.title }}</view>
-      <view class="item">{{ item.description }}</view>
-      <view class="item">{{ item.updatedAt }}</view>
+      <view class="item title">title>
+        <br>
+        {{ item.title }}
+      </view>
+      <view class="item des">描述:
+        {{ item.description }}
+      </view>
+      <view class="item time">{{ item.updatedAt }}</view>
     </view>
     <br>
     <view class="content">
@@ -27,6 +32,18 @@ const props = defineProps({
 
 </script>
 
-<style scoped>
+<style scoped lang="less">
+.markdownCon {
+  .MarkdownDetail {
+    .flex-row(column);
 
+    .item {
+      white-space: pre-wrap;
+    }
+
+    .title, .des, .time {
+      margin-bottom: @margin-m;
+    }
+  }
+}
 </style>

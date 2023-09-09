@@ -5,8 +5,12 @@ export default {
      * 获取首页数据
      * @return Promise
      */
-    async home() {
-        return http<String[]>({url: '/api/home'})
+    async home(params: {}) {
+        return http<String[]>({
+            url: '/api/home',
+            data: params,
+            method: 'POST'
+        })
     },
     /**
      * 获取数据失败的测试
@@ -52,6 +56,14 @@ export default {
     async getMarkdownById(params: any) {
         return http<String[]>({
             url: '/api/markdownFile/getData',
+            method: 'POST',
+            data: params
+        })
+    },
+
+    async getMarkdownContent(params:any){
+        return http<String[]>({
+            url: '/api/markdownFile/transformToHtml',
             method: 'POST',
             data: params
         })

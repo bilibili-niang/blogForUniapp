@@ -59,6 +59,24 @@
 .title {
   font-size: @font-m;
   font-weight: lighter;
+  color: @fontColor;
+  margin-bottom: @margin-m;
+}
+
+.time {
+  font-size: @font-m;
+  color: @fontColor;
+  margin-bottom: @margin-m;
+}
+
+.des {
+  font-size: @font-m;
+  color: @fontColor;
+}
+
+.bigTitle {
+  font-size: @font-l;
+  font-weight: bold;
 }
 
 /deep/ button {
@@ -69,6 +87,18 @@
 }
 
 //tag的边框颜色
-/deep/ .uni-tag{
-  border-color: @bor;
+/deep/ .uni-tag {
+  border-color: @borderColor;
+}
+
+.red {
+  color: #dd524d;
+}
+
+.mainBtn {
+  z-index: 10;
+  color: @fontColor;
+  border: @themeActiveColor 1px solid;
+  padding: 10rpx;
+  border-radius: @radio-ls;
 }

@@ -22,13 +22,13 @@
       </view>
       <view class="itemLim"></view>
       <view class="itemLim"></view>
-      <uni-popup ref="popup" type="bottom" background-color="#fff">
+      <uni-popup ref="popup" type="bottom">
         <view class="popupLim" :style="{'padding-top':safeAreaInsets?.top+'px'}">
           <view class="itemLim">
-            <view class="icon" @tap="closePopup">
+            <view class="icon redIcon red" @tap="closePopup">
               close
             </view>
-            <view class="title">
+            <view class="title red">
               关闭
             </view>
           </view>
@@ -105,6 +105,10 @@ const goReadTags = (item: string) => {
         justify-content: center;
       }
 
+      .redIcon {
+        box-shadow: 5rpx 5rpx 10rpx 10rpx #dd524d;
+      }
+
       .title {
         font-size: @font-s;
         .flex-row();
@@ -117,11 +121,16 @@ const goReadTags = (item: string) => {
     flex-wrap: wrap;
     flex-direction: row !important;
     justify-content: center;
+    background: @bacColor;
 
     .itemLim {
       max-width: 140rpx;
       justify-content: center;
       align-items: center;
+
+      .icon {
+        background: @themeColor-heightLight !important;
+      }
     }
   }
 }

@@ -1,8 +1,8 @@
 <!--自定义navBar-->
 <template>
-  <div class="navBar" :style="{'margin-top':safeAreaInsets?.top+'px'}">
-    <uni-nav-bar dark shadow :left-icon="back?'left':''" :leftText="back?'返回':''" :rightText="rightText"
-                 :title="title" height="100rpx"/>
+  <div class="navBar" :style=" {'margin-top':safeAreaInsets?.top+'px'}">
+    <uni-nav-bar dark size="20" shadow :left-icon="back?'left':''" :leftText="back?'返回':''" :rightText="rightText"
+                 :title="title" height="90rpx"/>
   </div>
 
 </template>

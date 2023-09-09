@@ -12,5 +12,8 @@ onHide(() => {
 });
 </script>
 <style lang="less">
+#app {
+  margin-bottom: 10vh;
+}
 
 </style>

@@ -41,8 +41,6 @@ const errFun = () => {
 
 // 跳转阅读
 const goToRead = (id: number) => {
-  console.log('goToRead')
-  console.log(id)
   uni.setStorageSync('readId', id)
   uni.navigateTo({
     url: '/pages/read/index?id=' + id

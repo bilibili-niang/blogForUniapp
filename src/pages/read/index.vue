@@ -6,8 +6,7 @@
     <view class="time">
       {{ data?.updatedAt }}
     </view>
-    <view class="content">
-      {{ data?.content }}
+    <view class="content markdown" v-html="content">
 
     </view>
     <view class="tags">
@@ -28,6 +27,9 @@ import TabBar from "@/components/common/tabBar/tabBar.vue";
 const data = ref()
 const id = ref()
 
+// markdown的html内容
+let content = ref('')
+
 const init = async () => {
   onLoad((opt: any) => {
     id.value = opt.value
@@ -38,10 +40,10 @@ const init = async () => {
   // 通过id请求详情
   const res = await api.getMarkdownById({id: id.value})
   data.value = res.result
-  const content = await api.getMarkdownContent({id: id.value})
-  console.log('content')
-  console.log(content);
-
+  const contentTemp = await api.getMarkdownContent({id: id.value})
+  if (contentTemp.success) {
+    content.value = contentTemp.result + ''
+  }
   uni.stopPullDownRefresh();
 }
 

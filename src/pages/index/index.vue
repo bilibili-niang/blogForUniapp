@@ -71,7 +71,7 @@ init()
 }
 
 .title {
-  font-size: 36rpx;
+  font-size: 36 rpx;
   color: #8f8f94;
 }
 </style>

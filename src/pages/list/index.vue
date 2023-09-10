@@ -16,7 +16,7 @@
 
 import {ref} from "vue";
 import api from "@/utils/api";
-import {onPullDownRefresh} from "@dcloudio/uni-app";
+import {onPullDownRefresh, onReachBottom} from "@dcloudio/uni-app";
 import Item from "@/pages/about/components/item.vue";
 
 const list = ref()
@@ -32,16 +32,27 @@ const init = async () => {
     pageSize: pageSize.value
   })
   if (res.success) {
-    list.value = res.result
+    if (pageNum.value !== 1) {
+      list.value = list.value.concat(res.result)
+    } else {
+      list.value = res.result
+    }
   } else {
     list.value = false
   }
-
 }
 
+// 触底
+onReachBottom(() => {
+  console.log('触底')
+  // pageNum++
+  pageNum.value++
+  init()
+})
 
 // 下拉触发刷新
 onPullDownRefresh(() => {
+  pageNum.value = 1
   init()
 })
 

@@ -1,6 +1,10 @@
 <template>
   <view class="tabBar">
-    <view class="Lim" v-for="(item, index) in list" :key="index">
+    <view class="Lim" v-for="(item, index) in list" :key="index"
+          :class="[
+        ('/' + currentRoute) ===item.path?'active':''
+    ]"
+    >
       <view class="item" @click="navigate(item.path)">
         <view class="title">{{ item.title }}</view>
         <image v-if="item.icon" class="icon" :src="item.icon"/>
@@ -54,23 +58,31 @@ const navigate = (path: string) => {
   display: flex;
   justify-content: space-around;
   position: fixed;
-  bottom: 20rpx;
+  bottom: 20px;
   left: 0;
   z-index: 5;
 
 
   .Lim {
+    border-bottom: rgba(0, 0, 0, 0) 0rem solid;
+    transition-duration: .5s;
+    border-radius: @radio-m;
 
     .item {
       background: @bacColor;
       margin-left: @margin-m;
       margin-right: @margin-m;
+      border-radius: @radio-m;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      padding: 10rpx;
+      padding: 10px;
     }
+  }
+
+  .active {
+    border-bottom: @themeActiveColor .3rem solid;
   }
 
   .icon, .activeIcon {

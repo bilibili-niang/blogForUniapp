@@ -18,7 +18,6 @@
 
         <view class="time">
           <uni-easyinput type="textarea" v-model="content" placeholder="请输入内容"></uni-easyinput>
-
         </view>
       </view>
 
@@ -48,6 +47,7 @@ const init = () => {
   const seconds = now.second();
   time.value = `${year}-${month}-${date} ${hours}:${minutes}:${seconds}`
 }
+
 
 init()
 </script>

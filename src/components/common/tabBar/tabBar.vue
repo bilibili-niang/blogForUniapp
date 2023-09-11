@@ -58,13 +58,14 @@ const navigate = (path: string) => {
   display: flex;
   justify-content: space-around;
   position: fixed;
-  bottom: 20px;
+  bottom: 10rpx;
   left: 0;
   z-index: 5;
-
+  background: rgba(0, 0, 0, .7);
+  width: 100vw;
 
   .Lim {
-    border-bottom: rgba(0, 0, 0, 0) 0rem solid;
+    border-bottom: rgba(0, 0, 0, 0) 0 solid;
     transition-duration: .5s;
     border-radius: @radio-m;
 
@@ -77,12 +78,31 @@ const navigate = (path: string) => {
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      padding: 10px;
+      padding-left: @padding-s;
+      padding-right: @padding-s;
+      padding-bottom: 0rpx;
+      transition-duration: .5s;
+
+      .title {
+        font-size: @font-s;
+        white-space: nowrap;
+        font-weight: normal;
+      }
+
     }
   }
 
   .active {
     border-bottom: @themeActiveColor .3rem solid;
+
+    .item {
+      padding-bottom: @padding-l !important;
+
+      .title {
+        font-size: @font-l !important;
+
+      }
+    }
   }
 
   .icon, .activeIcon {

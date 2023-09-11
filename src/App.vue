@@ -2,7 +2,6 @@
 import {onHide, onLaunch, onShow} from "@dcloudio/uni-app";
 
 onLaunch(() => {
-
 });
 onShow(() => {
 

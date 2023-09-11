@@ -7,7 +7,7 @@
     <classify :item="classifyItem"></classify>
 
     <view class="content">
-      <markdownCon :item="randomOne"></markdownCon>
+      <markdownCon ref="content" :item="randomOne"></markdownCon>
     </view>
   </view>
   <tabBar/>
@@ -21,6 +21,7 @@ import api from "@/utils/api";
 import RecommendMarkdown from "@/pages/index/components/recommendMarkdown.vue";
 import Classify from "@/pages/index/components/classify.vue";
 import MarkdownCon from "@/components/common/markdownCon.vue";
+import {onPullDownRefresh} from "@dcloudio/uni-app";
 
 let loopItem = ref<any>([])
 const activeIndex = ref(0)
@@ -28,8 +29,14 @@ const getIndex = (id: number) => {
   // console.log(`前激活id: ${id}`)
   activeIndex.value = id
 }
-// 首页推荐列表
-const recommendList = ref([])
+
+const content=ref('')
+
+// 下拉触发获取随机文章
+onPullDownRefresh(() => {
+  random()
+  console.log(content.value.init);
+})
 
 // 分类列表
 const classifyItem = ref<any>([])
@@ -44,10 +51,12 @@ const init = async () => {
   console.log(loopItem)
   const tags = await api.allTags()
   classifyItem.value = tags.result
+  random()
+}
 
+const random = async () => {
   const random = await api.getRandomOne()
   randomOne.value = random.result
-
 }
 
 init()
@@ -71,7 +80,7 @@ init()
 }
 
 .title {
-  font-size: 36 rpx;
+  font-size: 36rpx;
   color: #8f8f94;
 }
 </style>

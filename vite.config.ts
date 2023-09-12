@@ -1,5 +1,6 @@
 import {defineConfig} from "vite";
 import uni from "@dcloudio/vite-plugin-uni";
+// @ts-ignore
 import path from "path";
 
 // https://vitejs.dev/config/

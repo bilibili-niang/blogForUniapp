@@ -10,7 +10,7 @@
       <markdownCon ref="content" :item="randomOne"></markdownCon>
     </view>
   </view>
-  <tabBar/>
+    <tabBar/>
 </template>
 
 <script setup lang="ts">
@@ -30,7 +30,7 @@ const getIndex = (id: number) => {
   activeIndex.value = id
 }
 
-const content=ref('')
+const content = ref('')
 
 // 下拉触发获取随机文章
 onPullDownRefresh(() => {

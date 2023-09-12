@@ -15,7 +15,7 @@
       </view>
     </view>
   </view>
-  <tabBar/>
+<!--  <tabBar/>-->
 </template>
 
 <script setup lang="ts">

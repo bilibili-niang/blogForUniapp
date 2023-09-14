@@ -5,7 +5,6 @@
         <view class="title">
           今日时间
         </view>
-
         <view class="time">
           {{ time }}
         </view>
@@ -15,28 +14,106 @@
         <view class="title">
           content
         </view>
+        <view class="time">
+          <uni-easyinput type="textarea" v-model="events.content" :clearable="false" placeholder="请输入内容"></uni-easyinput>
+        </view>
+      </view>
+
+      <view class="formItem">
+        <view class="title">
+          name
+        </view>
+        <view class="time">
+          <uni-easyinput v-model="events.name" :clearable="false" placeholder="请输入内容"></uni-easyinput>
+        </view>
+      </view>
+
+      <view class="formItem">
+        <view class="title">
+          description
+        </view>
 
         <view class="time">
-          <uni-easyinput type="textarea" v-model="content" placeholder="请输入内容"></uni-easyinput>
+          <uni-easyinput type="textarea" :clearable="false" v-model="events.description" placeholder="请输入内容"></uni-easyinput>
+        </view>
+      </view>
+      <view class="formItem">
+        <view class="title">
+          tag1
+        </view>
+        <view class="time">
+          <uni-easyinput v-model="events.tag1" :clearable="false" placeholder="请输入内容"></uni-easyinput>
+        </view>
+      </view>
+
+      <view class="formItem">
+        <view class="title">
+          tag2
+        </view>
+        <view class="time">
+          <uni-easyinput v-model="events.tag2" :clearable="false" placeholder="请输入内容"></uni-easyinput>
+        </view>
+      </view>
+
+
+      <view class="formItem">
+        <view class="title">
+          tag3
+        </view>
+        <view class="time">
+          <uni-easyinput v-model="events.tag3" :clearable="false" placeholder="请输入内容"></uni-easyinput>
+        </view>
+      </view>
+
+      <view class="formItem">
+        <view class="title">
+          tomorrow
+        </view>
+        <view class="time">
+          <uni-easyinput v-model="events.tomorrow" :clearable="false" placeholder="请输入内容"></uni-easyinput>
         </view>
       </view>
 
     </view>
 
+    <view class="btns">
+      <view class="mainBtn" @tap="post">
+        post!
+      </view>
+    </view>
   </view>
   <tabBar/>
 </template>
 
 <script setup lang="ts">
 
-import {ref} from "vue";
+import {reactive, ref} from "vue";
 import dayjs from "dayjs";
+import api from "@/utils/api";
 
 const now = dayjs();
 
-
 const time = ref('')
 const content = ref('')
+
+const events = reactive({
+  op: "add",
+  name: "今日测试事件",
+  description: "这个是测试事件的描述",
+  content: "今天还是写代码发呆,困得很,一直在看代码,bug真多,不知道到明天有多困",
+  tag1: "today",
+  tag2: "nothing",
+  tag3: "上班",
+  tomorrow: "暂无计划,明天周五,看地狱乐,打游戏"
+})
+
+const post = async () => {
+  console.log('post!')
+
+  const res = await api.postEvents({})
+
+}
+
 
 const init = () => {
   const year = now.year();
@@ -48,10 +125,13 @@ const init = () => {
   time.value = `${year}-${month}-${date} ${hours}:${minutes}:${seconds}`
 }
 
-
 init()
 </script>
 
-<style scoped>
+<style scoped lang="less">
+.addEvents {
+  .padding-lr-20();
+  padding-bottom: 20vh;
 
+}
 </style>

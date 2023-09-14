@@ -11,7 +11,7 @@
                 activeIndex===index?'active':'noActive'
             ]"
             :style="{
-          'background': 'url(http://localhost:89'+item.headImg+')'
+          'background': 'url(https://blog.icestone.work'+item.headImg+')'
         }" class="swiperImg"/>
         <view class="title" :class="[
                 activeIndex===index?'activeTitle':'noActive'

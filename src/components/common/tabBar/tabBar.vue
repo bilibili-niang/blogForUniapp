@@ -1,16 +1,19 @@
 <template>
   <view class="tabBar">
-    <view class="Lim" v-for="(item, index) in list" :key="index"
-          :class="[
+    <view class="tabCon">
+      <view class="Lim" v-for="(item, index) in list" :key="index"
+            :class="[
         ('/' + currentRoute) ===item.path?'active':''
     ]"
-    >
-      <view class="item" @click="navigate(item.path)">
-        <view class="title">{{ item.title }}</view>
-        <image v-if="item.icon" class="icon" :src="item.icon"/>
-        <image v-if="item.activeIcon" class="activeIcon" :src="item.activeIcon"/>
+      >
+        <view class="item" @click="navigate(item.path)">
+          <view class="title">{{ item.title }}</view>
+          <image v-if="item.icon" class="icon" :src="item.icon"/>
+          <image v-if="item.activeIcon" class="activeIcon" :src="item.activeIcon"/>
+        </view>
       </view>
     </view>
+
   </view>
 </template>
 
@@ -38,13 +41,19 @@ const list = reactive([
     path: '/pages/list/index',
     icon: '',
     activeIcon: ''
+  },
+  {
+    title: 'mine',
+    path: '/pages/mine/index',
+    icon: '',
+    activeIcon: ''
   }
 ]);
 
 // 添加跳转逻辑
 const navigate = (path: string) => {
   if (('/' + currentRoute) != path) {
-    uni.navigateTo({
+    uni.redirectTo({
       url: `${path}`
     })
   } else {
@@ -56,18 +65,29 @@ const navigate = (path: string) => {
 <style scoped lang="less">
 .tabBar {
   display: flex;
-  justify-content: space-around;
   position: fixed;
   bottom: 10rpx;
   left: 0;
   z-index: 5;
-  background: rgba(0, 0, 0, .7);
   width: 100vw;
+
+  .tabCon {
+    background: @tabBac;
+    .flex-row();
+    justify-content: space-around;
+    width: 95%;
+    margin: 0 auto;
+    padding-top: @padding-s;
+    padding-bottom: @padding-l;
+    border-radius: @radio-l;
+    overflow: hidden;
+
+  }
+
 
   .Lim {
     border-bottom: rgba(0, 0, 0, 0) 0 solid;
     transition-duration: .5s;
-    border-radius: @radio-m;
 
     .item {
       background: @bacColor;
@@ -92,22 +112,27 @@ const navigate = (path: string) => {
     }
   }
 
+  // 激活样式
   .active {
-    border-bottom: @themeActiveColor .3rem solid;
+
+    .Lim {
+      overflow: hidden;
+      border-radius: 50% !important;
+    }
 
     .item {
-      padding-bottom: @padding-l !important;
+      padding-bottom: @padding-s !important;
+      overflow: hidden;
+      background: @fontColor !important;
+      color: @bacColor !important;
 
       .title {
-        font-size: @font-l !important;
-
+        font-size: @font-s !important;
+        color: @bacColor !important;
       }
     }
   }
 
-  .icon, .activeIcon {
-  }
 }
-
 
 </style>

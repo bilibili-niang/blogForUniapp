@@ -3,12 +3,13 @@
   <view class="markdownCon">
     <view class="MarkdownDetail">
       <view class="item title">
+        title>
         {{ item.title }}
       </view>
-      <view class="item des">描述:
+      <view class="item des">描述>
         {{ item.description }}
       </view>
-      <view class="item time">{{ item.updatedAt }}</view>
+      <view class="item time">updatedAt>{{ item.updatedAt }}</view>
     </view>
     <br>
     <view class="content">
@@ -35,15 +36,17 @@ const props = defineProps({
 // markdown的html内容
 let content = ref('')
 const init = async () => {
+  console.log(props.item)
   const contentTemp = await api.getMarkdownContent({id: props.item.id})
-  console.log('contentTemp--->')
-  console.log(contentTemp)
   if (contentTemp.success) {
     content.value = contentTemp.result + ''
   }
+  console.log(content.value)
 }
-console.log(content.value)
-init()
+
+setTimeout(() => {
+  init()
+}, 300)
 </script>
 
 <style scoped lang="less">

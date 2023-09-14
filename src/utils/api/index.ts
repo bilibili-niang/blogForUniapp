@@ -2,12 +2,13 @@ import {useMemberStore} from "@/stores";
 import home from "./home";
 import type {Data} from "@/types/data";
 import env from "./env";
+import events from "./events";
 
 // 服务器开发
-// export const baseUrl: String = `https://blog.icestone.work`;
+export const baseUrl: String = `https://blog.icestone.work`;
 
 // 本地开发
-export const baseUrl: String = `http://localhost:89`;
+// export const baseUrl: String = `http://localhost:89`;
 
 // 添加拦截器
 const httpInterceptor = {
@@ -71,5 +72,6 @@ export const http = <T>(options: UniApp.RequestOptions) => {
 export default {
     baseUrl,
     ...home,
-    ...env
+    ...env,
+    ...events
 }

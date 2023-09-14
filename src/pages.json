@@ -50,6 +50,14 @@
         "enablePullDownRefresh": true,
         "onReachBottomDistance": 200
       }
+    },
+    {
+      "path": "pages/mine/index",
+      "style": {
+        "navigationBarTitleText": "mine",
+        "enablePullDownRefresh": true,
+        "onReachBottomDistance": 200
+      }
     }
   ],
   "globalStyle": {
@@ -58,24 +66,24 @@
     "navigationBarBackgroundColor": "#F8F8F8",
     "backgroundColor": "#F8F8F8"
   }
-/*  "tabBar": {
-    "backgroundColor": "#ffffff",
-    "color": "#666666",
-    "selectedColor": "#ff4437",
-    "borderStyle": "white",
-    "list": [
-      {
-        "pagePath": "pages/index/index",
-        "text": "首页"
-      },
-      {
-        "pagePath": "pages/addEvents/index",
-        "text": "记录今日"
-      },
-      {
-        "pagePath": "pages/list/index",
-        "text": "列表"
-      }
-    ]
-  }*/
+  /*  "tabBar": {
+      "backgroundColor": "#ffffff",
+      "color": "#666666",
+      "selectedColor": "#ff4437",
+      "borderStyle": "white",
+      "list": [
+        {
+          "pagePath": "pages/index/index",
+          "text": "首页"
+        },
+        {
+          "pagePath": "pages/addEvents/index",
+          "text": "记录今日"
+        },
+        {
+          "pagePath": "pages/list/index",
+          "text": "列表"
+        }
+      ]
+    }*/
 }

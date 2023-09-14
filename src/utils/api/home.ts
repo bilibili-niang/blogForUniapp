@@ -61,7 +61,7 @@ export default {
         })
     },
 
-    async getMarkdownContent(params:any){
+    async getMarkdownContent(params: any) {
         return http<String[]>({
             url: '/api/markdownFile/transformToHtml',
             method: 'POST',

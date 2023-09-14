@@ -93,4 +93,11 @@ init()
 .description {
   margin-bottom: @margin-l;
 }
+
+.item {
+  .flex-row();
+  width: 100%;
+  justify-content: space-evenly;
+}
+
 </style>

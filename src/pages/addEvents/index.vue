@@ -1,6 +1,7 @@
 <template>
+  <customNavBar :back="false" :title="'事件'+flag"></customNavBar>
   <view class="addEvents">
-    <view class="formLim">
+    <view class="formLim" v-if="flag==='add'">
       <view class="formItem">
         <view class="title">
           今日时间
@@ -15,7 +16,8 @@
           content
         </view>
         <view class="time">
-          <uni-easyinput type="textarea" v-model="events.content" :clearable="false" placeholder="请输入内容"></uni-easyinput>
+          <uni-easyinput type="textarea" v-model="events.content" :clearable="false"
+                         placeholder="请输入内容"></uni-easyinput>
         </view>
       </view>
 
@@ -34,7 +36,8 @@
         </view>
 
         <view class="time">
-          <uni-easyinput type="textarea" :clearable="false" v-model="events.description" placeholder="请输入内容"></uni-easyinput>
+          <uni-easyinput type="textarea" :clearable="false" v-model="events.description"
+                         placeholder="请输入内容"></uni-easyinput>
         </view>
       </view>
       <view class="formItem">
@@ -55,7 +58,6 @@
         </view>
       </view>
 
-
       <view class="formItem">
         <view class="title">
           tag3
@@ -73,14 +75,14 @@
           <uni-easyinput v-model="events.tomorrow" :clearable="false" placeholder="请输入内容"></uni-easyinput>
         </view>
       </view>
-
-    </view>
-
-    <view class="btns">
-      <view class="mainBtn" @tap="post">
-        post!
+      <view class="btns">
+        <view class="mainBtn" @tap="post">
+          post!
+        </view>
       </view>
     </view>
+
+
   </view>
   <tabBar/>
 </template>
@@ -90,8 +92,11 @@
 import {reactive, ref} from "vue";
 import dayjs from "dayjs";
 import api from "@/utils/api";
+import CustomNavBar from "@/pages/index/components/customNavBar.vue";
 
 const now = dayjs();
+// 当前模式 view为浏览
+let flag = ref('view')
 
 const time = ref('')
 const content = ref('')

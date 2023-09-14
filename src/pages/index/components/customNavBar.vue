@@ -1,7 +1,7 @@
 <!--自定义navBar-->
 <template>
   <div class="navBar" :style=" {'margin-top':safeAreaInsets?.top+'px'}">
-    <uni-nav-bar dark size="20" shadow :left-icon="back?'left':''" :leftText="back?'返回':''" :rightText="rightText"
+    <uni-nav-bar size="20" shadow :left-icon="back?'left':''" :leftText="back?'返回':''" :rightText="rightText"
                  :title="title" height="90rpx"/>
   </div>
 
@@ -29,6 +29,6 @@ const props = defineProps({
 
 <style scoped lang="less">
 .navBar {
-  background: @bacColor-bleak;
+  background: @tabBac;
 }
 </style>

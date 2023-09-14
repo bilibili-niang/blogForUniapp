@@ -3,11 +3,10 @@ import home from "./home";
 import type {Data} from "@/types/data";
 import env from "./env";
 import events from "./events";
+import user from "@/utils/api/user";
 
 // 服务器开发
 export const baseUrl: String = `https://blog.icestone.work`;
-
-// 本地开发
 // export const baseUrl: String = `http://localhost:89`;
 
 // 添加拦截器
@@ -73,5 +72,6 @@ export default {
     baseUrl,
     ...home,
     ...env,
-    ...events
+    ...events,
+    ...user
 }

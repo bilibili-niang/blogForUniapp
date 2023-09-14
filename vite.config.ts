@@ -15,7 +15,7 @@ export default defineConfig({
             }
         }
     },
-    /*server: {
+    server: {
         https: false,
         proxy: {
             // TODO h5开发把下面的配置打开
@@ -26,5 +26,5 @@ export default defineConfig({
                 rewrite: (path) => path.replace(/^\/api/, "")
             }
         },
-    }*/
+    }
 });

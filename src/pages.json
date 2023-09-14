@@ -40,7 +40,8 @@
       "path": "pages/addEvents/index",
       "style": {
         "navigationBarTitleText": "记录今日",
-        "enablePullDownRefresh": true
+        "enablePullDownRefresh": true,
+        "navigationStyle": "custom"
       }
     },
     {
@@ -48,6 +49,7 @@
       "style": {
         "navigationBarTitleText": "列表",
         "enablePullDownRefresh": true,
+        "navigationStyle": "custom",
         "onReachBottomDistance": 200
       }
     },
@@ -56,6 +58,7 @@
       "style": {
         "navigationBarTitleText": "mine",
         "enablePullDownRefresh": true,
+        "navigationStyle": "custom",
         "onReachBottomDistance": 200
       }
     }

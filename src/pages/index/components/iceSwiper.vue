@@ -5,7 +5,13 @@
             @change="durationChange"
     >
       <swiper-item v-for="(item,index) in list" :key="index" :class="['swiperCon']">
-        <!--<image :src="'https://blog.icestone.work'+item.headImg" alt="" class="swiperImg"/>-->
+        <!-- <view
+                    :class="[
+                        activeIndex===index?'active':'noActive'
+                    ]"
+                    :style="{
+                  'background': 'url(http://localhost:89'+item.headImg+')'
+                }" class="swiperImg"/>-->
         <view
             :class="[
                 activeIndex===index?'active':'noActive'
@@ -13,6 +19,7 @@
             :style="{
           'background': 'url(https://blog.icestone.work'+item.headImg+')'
         }" class="swiperImg"/>
+
         <view class="title" :class="[
                 activeIndex===index?'activeTitle':'noActive'
             ]">

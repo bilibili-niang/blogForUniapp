@@ -11,15 +11,15 @@
       "path": "pages/index/index",
       "style": {
         "navigationBarTitleText": "首页",
-        "navigationStyle": "custom",
+        // "navigationStyle": "custom",
         "enablePullDownRefresh": true
       }
     },
     {
       "path": "pages/login/index",
       "style": {
-        "navigationBarTitleText": "登录",
-        "navigationStyle": "custom"
+        "navigationBarTitleText": "登录"
+        // "navigationStyle": "custom"
       }
     },
     {
@@ -40,8 +40,8 @@
       "path": "pages/addEvents/index",
       "style": {
         "navigationBarTitleText": "记录今日",
-        "enablePullDownRefresh": true,
-        "navigationStyle": "custom"
+        "enablePullDownRefresh": true
+        // "navigationStyle": "custom"
       }
     },
     {
@@ -49,7 +49,7 @@
       "style": {
         "navigationBarTitleText": "列表",
         "enablePullDownRefresh": true,
-        "navigationStyle": "custom",
+        // "navigationStyle": "custom",
         "onReachBottomDistance": 200
       }
     },
@@ -58,35 +58,42 @@
       "style": {
         "navigationBarTitleText": "mine",
         "enablePullDownRefresh": true,
-        "navigationStyle": "custom",
+        // "navigationStyle": "custom",
         "onReachBottomDistance": 200
       }
     }
   ],
   "globalStyle": {
-    "navigationBarTextStyle": "black",
+    "navigationBarTextStyle": "white",
     "navigationBarTitleText": "uni-app",
-    "navigationBarBackgroundColor": "#F8F8F8",
+    "navigationBarBackgroundColor": "#202124",
+    "backgroundTextStyle": "dark",
+    "color": "#ffffff",
     "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "backgroundColor": "#202124",
+    "color": "#ffffff",
+    "selectedColor": "#f1c4cd",
+    "borderStyle": "black",
+    "fontSize": "35",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/addEvents/index",
+        "text": "记录今日"
+      },
+      {
+        "pagePath": "pages/list/index",
+        "text": "列表"
+      },
+      {
+        "pagePath": "pages/mine/index",
+        "text": "我的"
+      }
+    ]
   }
-  /*  "tabBar": {
-      "backgroundColor": "#ffffff",
-      "color": "#666666",
-      "selectedColor": "#ff4437",
-      "borderStyle": "white",
-      "list": [
-        {
-          "pagePath": "pages/index/index",
-          "text": "首页"
-        },
-        {
-          "pagePath": "pages/addEvents/index",
-          "text": "记录今日"
-        },
-        {
-          "pagePath": "pages/list/index",
-          "text": "列表"
-        }
-      ]
-    }*/
 }

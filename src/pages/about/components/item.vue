@@ -1,6 +1,6 @@
 <template>
   <view class="itemCon">
-    <image class="coverImg" mode="aspectFill" @error="errFun" :src="'http://localhost:89'+childrenItem.headImg"></image>
+    <image class="coverImg" mode="aspectFill" @error="errFun" :src="childrenItem.headImg"></image>
     <view class="coverBac"></view>
     <view class="coverCon">
       <view class="title">

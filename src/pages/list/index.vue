@@ -1,5 +1,4 @@
 <template>
-  <customNavBar :back="false" title="列表"></customNavBar>
 
   <view class="list">
     <view class="content" v-if="list">
@@ -11,7 +10,6 @@
     </view>
 
   </view>
-  <tabBar/>
 </template>
 
 <script setup lang="ts">
@@ -20,7 +18,6 @@ import {ref} from "vue";
 import api from "@/utils/api";
 import {onPullDownRefresh, onReachBottom} from "@dcloudio/uni-app";
 import Item from "@/pages/about/components/item.vue";
-import CustomNavBar from "@/pages/index/components/customNavBar.vue";
 
 const list = ref()
 

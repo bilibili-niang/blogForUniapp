@@ -14,7 +14,6 @@
     </view>
     <!--    {{ data }}-->
   </view>
-  <tabBar></tabBar>
 </template>
 
 <script setup lang="ts">

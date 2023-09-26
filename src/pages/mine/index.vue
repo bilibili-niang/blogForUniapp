@@ -1,5 +1,4 @@
 <template>
-  <customNavBar :back="false" title="关于我"></customNavBar>
   <view class="mine">
     <view class="mainBtn" @tap="login">
       login
@@ -9,19 +8,27 @@
       {{ code }}
     </view>
 
+    <!--{{ openIdList }}:-->
+    <view class="openIdList">
+      <view class="item" v-for="(item,index) in openIdList" :key="index">
+
+        {{ item }}
+
+      </view>
+    </view>
 
   </view>
-  <tabBar/>
 </template>
 
 <script setup lang="ts">
-import CustomNavBar from "@/pages/index/components/customNavBar.vue";
-import {ref} from "vue";
+import {reactive, ref} from "vue";
 import api from "@/utils/api";
 
 let userInfo = ref()
 
 let code = ref()
+let openIdList = reactive([])
+
 const login = () => {
   uni.login({
     provider: 'weixin', //使用微信登录
@@ -32,6 +39,9 @@ const login = () => {
         code: code.value
       })
       console.log(res)
+      openIdList.push(res.result)
+      // api.
+
     },
     fail: function (err) {
       console.log('err')
@@ -63,5 +73,8 @@ const getInfo = () => {
 </script>
 
 <style scoped lang="less">
+.mine {
+  padding: @padding-m;
+}
 
 </style>

@@ -1,34 +1,35 @@
 <template>
   <view class="mine">
-    <view class="mainBtn" @tap="login">
-      login
-    </view>
+    <div class="ice-text">
+      暂未开放,sorry
+    </div>
 
-    <view class="data">
-      {{ code }}
-    </view>
+    <!--    <view v-if="!userInfo">
+          数据为空
+        </view>
+        <view class="mainBtn" @tap="login">
+          login
+        </view>
 
-    <!--{{ openIdList }}:-->
-    <view class="openIdList">
-      <view class="item" v-for="(item,index) in openIdList" :key="index">
+        &lt;!&ndash;{{ openIdList }}:&ndash;&gt;
+        <view class="openIdList">
+          <view class="item">
 
-        {{ item }}
+            {{ openIdList }}
 
-      </view>
-    </view>
+          </view>
+        </view>-->
 
   </view>
 </template>
 
 <script setup lang="ts">
-import {reactive, ref} from "vue";
+import {ref} from "vue";
 import api from "@/utils/api";
 
-let userInfo = ref()
-
 let code = ref()
-let openIdList = reactive([])
 
+const userInfo = ref()
 const login = () => {
   uni.login({
     provider: 'weixin', //使用微信登录
@@ -38,10 +39,20 @@ const login = () => {
       const res = await api.login({
         code: code.value
       })
-      console.log(res)
-      openIdList.push(res.result)
-      // api.
-
+      if (res.success) {
+        userInfo.value = res.result
+        delete res.result.realPassword
+        uni.setStorageSync('user', res.result)
+        uni.showToast({
+          title: '登录成功',
+          icon: 'success'
+        })
+      } else {
+        uni.showToast({
+          title: '登录失败',
+          icon: 'error'
+        })
+      }
     },
     fail: function (err) {
       console.log('err')
@@ -73,7 +84,7 @@ const getInfo = () => {
 </script>
 
 <style scoped lang="less">
-.mine {
+.mine{
   padding: @padding-m;
 }
 

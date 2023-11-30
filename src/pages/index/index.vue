@@ -7,11 +7,11 @@
     <classify :item="classifyItem"></classify>
 
     <view class="description">
-      <view class="item">
-        <view class="left">
+      <view class="column">
+        <view class="left ice-tag">
           title
         </view>
-        <view class="right">
+        <view class="right ice-title">
           {{ randomOne?.title }}
         </view>
       </view>
@@ -63,6 +63,9 @@ const init = async () => {
 
 const random = async () => {
   const random = await api.getRandomOne()
+  if (random) {
+    uni.stopPullDownRefresh();
+  }
   randomOne.value = random.result
   const contentTemp = await api.getMarkdownContent({id: randomOne.value.id})
   if (contentTemp.success) {
@@ -83,6 +86,7 @@ init()
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
+  background: @bacColor-bleak;
 }
 
 .text-area{

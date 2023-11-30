@@ -10,7 +10,6 @@
         <view class="mainBtn" @tap="login">
           login
         </view>
-
         &lt;!&ndash;{{ openIdList }}:&ndash;&gt;
         <view class="openIdList">
           <view class="item">

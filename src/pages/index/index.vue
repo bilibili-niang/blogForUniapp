@@ -58,7 +58,7 @@ const init = async () => {
   console.log(loopItem)
   const tags = await api.allTags()
   classifyItem.value = tags.result
-  random()
+  await random();
 }
 
 const random = async () => {
@@ -73,11 +73,11 @@ const random = async () => {
 init()
 </script>
 <style scoped lang="less">
-.container {
+.container{
   padding-bottom: 10vh;
 }
 
-.content {
+.content{
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -85,16 +85,16 @@ init()
   flex-wrap: wrap;
 }
 
-.text-area {
+.text-area{
   display: flex;
   justify-content: center;
 }
 
-.description {
+.description{
   margin-bottom: @margin-l;
 }
 
-.item {
+.item{
   .flex-row();
   width: 100%;
   justify-content: space-evenly;

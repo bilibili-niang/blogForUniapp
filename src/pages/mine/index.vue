@@ -14,9 +14,7 @@
         &lt;!&ndash;{{ openIdList }}:&ndash;&gt;
         <view class="openIdList">
           <view class="item">
-
             {{ openIdList }}
-
           </view>
         </view>-->
 

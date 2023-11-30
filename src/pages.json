@@ -67,27 +67,35 @@
     "backgroundColor": "#F8F8F8"
   },
   "tabBar": {
-    "backgroundColor": "#202124",
-    "color": "#ffffff",
-    "selectedColor": "#f1c4cd",
+    "backgroundColor": "#dcdadd",
+    "color": "#333333",
+    "selectedColor": "#441a1e",
     "borderStyle": "black",
     "fontSize": "35",
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "首页"
+        "text": "首页",
+        "iconPath": "static/icon/index.png",
+        "selectedIconPath": "static/icon/indexActive.png"
       },
       {
         "pagePath": "pages/addEvents/index",
-        "text": "今日"
+        "text": "今日",
+        "iconPath": "static/icon/today.png",
+        "selectedIconPath": "static/icon/todayActive.png"
       },
       {
         "pagePath": "pages/list/index",
-        "text": "列表"
+        "text": "列表",
+        "iconPath": "static/icon/list.png",
+        "selectedIconPath": "static/icon/listActive.png"
       },
       {
         "pagePath": "pages/mine/index",
-        "text": "我的"
+        "text": "我的",
+        "iconPath": "static/icon/mine.png",
+        "selectedIconPath": "static/icon/mineActive.png"
       }
     ]
   }

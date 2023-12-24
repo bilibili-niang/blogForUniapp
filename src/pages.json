@@ -71,7 +71,6 @@
     "color": "#333333",
     "selectedColor": "#441a1e",
     "borderStyle": "black",
-    "fontSize": "35",
     "list": [
       {
         "pagePath": "pages/index/index",

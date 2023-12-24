@@ -6,18 +6,18 @@
     <!--分类-->
     <classify :item="classifyItem"></classify>
 
-    <view class="description">
-      <view class="column">
-        <view class="left ice-tag">
-          title
+    <!-- <view class="description">
+          <view class="column">
+            <view class="left ice-tag">
+              title
+            </view>
+            <view class="right ice-title">
+              {{ randomOne?.title }}
+            </view>
+          </view>
         </view>
-        <view class="right ice-title">
-          {{ randomOne?.title }}
-        </view>
-      </view>
-    </view>
-    <view class="content" v-html="content">
-    </view>
+        <view class="content" v-html="content">
+        </view>-->
   </view>
   <!--  <tabBar/>-->
 </template>

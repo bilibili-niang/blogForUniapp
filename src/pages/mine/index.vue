@@ -1,21 +1,35 @@
 <template>
   <view class="mine">
-    <div class="ice-text">
-      暂未开放,sorry
+    <ice-text>选择一个登录方式</ice-text>
+    <uni-data-select
+        v-model="loginType"
+        :localdata="loginData"
+        @change="typeChange"
+        :clear="false"
+    ></uni-data-select>
+
+    <div class="columnBlock"></div>
+    <div class="loginForm" v-if="loginType===0">
+      <uni-easyinput v-model="account.username" placeholder="账户"></uni-easyinput>
+      <div class="columnBlock"></div>
+      <uni-easyinput type="password" v-model="account.password" placeholder="密码"></uni-easyinput>
+      <div class="columnBlock"></div>
+      <div class="mainBtn login" @click="accountbyLogin">登录</div>
+
     </div>
 
-    <!--    <view v-if="!userInfo">
-          数据为空
+    <div v-else>
+      <view class="mainBtn" @tap="login">
+        login
+      </view>
+      <!--{{ openIdList }}:-->
+      <view class="openIdList">
+        <view class="item">
+
         </view>
-        <view class="mainBtn" @tap="login">
-          login
-        </view>
-        &lt;!&ndash;{{ openIdList }}:&ndash;&gt;
-        <view class="openIdList">
-          <view class="item">
-            {{ openIdList }}
-          </view>
-        </view>-->
+      </view>
+    </div>
+
 
   </view>
 </template>
@@ -77,11 +91,26 @@ const getInfo = () => {
   })
 }
 
+let account = ref({
+  username: '',
+  password: ''
+})
 
+let loginType = ref(0)
+const loginData = ref([
+  {value: 0, text: "账户登录"},
+  {value: 1, text: "微信登录"},
+])
+const typeChange = (e) => {
+  console.log(e)
+}
+const accountbyLogin = () => {
+
+}
 </script>
 
 <style scoped lang="less">
-.mine{
+.mine {
   padding: @padding-m;
 }
 

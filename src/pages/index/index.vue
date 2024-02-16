@@ -1,30 +1,15 @@
 <template>
   <customNavBar :back="false" title="首页"></customNavBar>
-  <iceSwiper :list="loopItem" @index="getIndex"></iceSwiper>
   <view class="container">
     <recommendMarkdown :list="loopItem" :activeIndex="activeIndex"></recommendMarkdown>
     <!--分类-->
     <classify :item="classifyItem"></classify>
-
-    <!-- <view class="description">
-          <view class="column">
-            <view class="left ice-tag">
-              title
-            </view>
-            <view class="right ice-title">
-              {{ randomOne?.title }}
-            </view>
-          </view>
-        </view>
-        <view class="content" v-html="content">
-        </view>-->
   </view>
   <!--  <tabBar/>-->
 </template>
 
 <script setup lang="ts">
 import CustomNavBar from "@/pages/index/components/customNavBar.vue";
-import IceSwiper from "./components/iceSwiper.vue";
 import {ref} from "vue";
 import api from "@/utils/api";
 import RecommendMarkdown from "@/pages/index/components/recommendMarkdown.vue";
@@ -33,10 +18,6 @@ import {onPullDownRefresh} from "@dcloudio/uni-app";
 
 let loopItem = ref<any>([])
 const activeIndex = ref(0)
-const getIndex = (id: number) => {
-  // console.log(`前激活id: ${id}`)
-  activeIndex.value = id
-}
 
 const content = ref('')
 

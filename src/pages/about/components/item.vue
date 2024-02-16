@@ -1,7 +1,7 @@
 <template>
   <view class="itemCon">
-    <image class="coverImg" mode="aspectFill" @error="errFun" :src="childrenItem.headImg"></image>
-    <view class="coverBac"></view>
+    <!--<image class="coverImg" mode="aspectFill" @error="errFun" :src="childrenItem.headImg"></image>-->
+    <!--<view class="coverBac"></view>-->
     <view class="coverCon">
       <view class="title">
         {{ childrenItem.title }}
@@ -34,11 +34,6 @@ const props = defineProps({
 
 const childrenItem = ref()
 
-// 图片加载失败时调用
-const errFun = () => {
-  childrenItem.value.headImg = api.mainUrl + '/defaultBac.png'
-}
-
 // 跳转阅读
 const goToRead = (id: number) => {
   uni.setStorageSync('readId', id)
@@ -52,15 +47,16 @@ childrenItem.value.headImg = api.mainUrl + props.item?.headImg
 </script>
 
 <style scoped lang="less">
-.itemCon {
+.itemCon{
   overflow: hidden;
   margin-bottom: @margin-m;
   border-radius: @radio-ls;
   background-size: cover;
   position: relative;
+  background: @borderColor;
 
 
-  .coverImg {
+  .coverImg{
     position: absolute;
     top: 0;
     left: 0;
@@ -71,7 +67,7 @@ childrenItem.value.headImg = api.mainUrl + props.item?.headImg
     z-index: -1;
   }
 
-  .coverBac {
+  .coverBac{
     position: absolute;
     display: flex;
     width: 100%;
@@ -80,7 +76,7 @@ childrenItem.value.headImg = api.mainUrl + props.item?.headImg
     z-index: 5;
   }
 
-  .coverCon {
+  .coverCon{
     box-sizing: border-box;
     z-index: 10;
     width: 95%;
@@ -93,24 +89,24 @@ childrenItem.value.headImg = api.mainUrl + props.item?.headImg
     background: @bacColor;
 
 
-    .title, .time {
+    .title, .time{
       border-radius: @radio-ls;
       z-index: 5;
     }
 
-    .des {
+    .des{
       z-index: 5;
       font-size: @font-m;
     }
 
-    .operate {
+    .operate{
       z-index: 5;
       .flex-row();
       width: 100%;
       justify-content: flex-start;
       margin-top: @margin-m;
 
-      /deep/ button {
+      /deep/ button{
         margin: 0;
       }
     }

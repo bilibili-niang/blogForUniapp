@@ -2,13 +2,10 @@
 
   <view class="list">
     <view class="content" v-if="list">
-
       <view class="listLim" v-for="(item,index) in list" :key="index">
         <item :item="item"></item>
       </view>
-
     </view>
-
   </view>
 </template>
 
@@ -61,8 +58,8 @@ init()
 </script>
 
 <style scoped lang="less">
-.list {
-  .content {
+.list{
+  .content{
     .padding-lr-20();
   }
 }

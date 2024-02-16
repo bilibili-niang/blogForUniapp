@@ -1,6 +1,6 @@
 <template>
   <view class="mine">
-    <ice-text>选择一个登录方式</ice-text>
+    <div class="ice-text">选择一个登录方式</div>
     <uni-data-select
         v-model="loginType"
         :localdata="loginData"
@@ -110,7 +110,7 @@ const accountbyLogin = () => {
 </script>
 
 <style scoped lang="less">
-.mine {
+.mine{
   padding: @padding-m;
 }
 

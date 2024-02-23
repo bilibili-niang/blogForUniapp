@@ -12,6 +12,8 @@ export const account = defineStore('account', {
     actions: {
         login(account: Object) {
             console.log(account)
+        },
+        setAccountInfo() {
         }
     }
 })

@@ -3,9 +3,9 @@
   <view class="container">
     <recommendMarkdown :list="loopItem" :activeIndex="activeIndex"></recommendMarkdown>
     <!--分类-->
-    <classify :item="classifyItem"></classify>
+    <!--<classify :item="classifyItem"></classify>-->
   </view>
-  <!--  <tabBar/>-->
+  <!--<tabBar/>-->
 </template>
 
 <script setup lang="ts">
@@ -13,7 +13,6 @@ import CustomNavBar from "@/pages/index/components/customNavBar.vue";
 import {ref} from "vue";
 import api from "@/utils/api";
 import RecommendMarkdown from "@/pages/index/components/recommendMarkdown.vue";
-import Classify from "@/pages/index/components/classify.vue";
 import {onPullDownRefresh} from "@dcloudio/uni-app";
 
 let loopItem = ref<any>([])
@@ -36,7 +35,6 @@ const randomOne = ref()
 const init = async () => {
   const res = await api.homeRecommend()
   loopItem.value = res.result
-  console.log(loopItem)
   const tags = await api.allTags()
   classifyItem.value = tags.result
   await random();

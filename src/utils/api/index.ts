@@ -6,8 +6,8 @@ import events from "./events";
 import user from "./user";
 
 // 服务器开发
-export const baseUrl: String = `https://blog.icestone.work`;
-// export const baseUrl: String = `http://localhost:89`;
+// export const baseUrl: String = `https://blog.icestone.work`;
+export const baseUrl: String = `http://localhost:89`;
 
 // 添加拦截器
 const httpInterceptor = {
@@ -38,8 +38,8 @@ export const http = <T>(options: UniApp.RequestOptions) => {
     options.url = options.url.replace('/api', baseUrl)
 
     return new Promise<Data<T>>((resolve, reject) => {
-        console.log("options.url:")
-        console.log(options.url)
+        /*console.log("options.url:")
+        console.log(options.url)*/
         uni.request({
             ...options,
             // 只代表响应成功,并没有判断状态码

@@ -87,6 +87,7 @@ const goReadTags = (item: string) => {
 
 <style scoped lang="less">
 .classify {
+  overflow-y: auto;
   .classifyLim {
     display: flex;
     flex-direction: row;

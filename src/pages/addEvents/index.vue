@@ -3,7 +3,7 @@
   <view class="addEvents">
     <view class="formLim" v-if="flag==='add'">
       <view class="formItem">
-        <view class="title">
+        <view class="title header">
           今日时间
         </view>
         <view class="time">
@@ -12,8 +12,8 @@
       </view>
 
       <view class="formItem">
-        <view class="title">
-          content
+        <view class="title header">
+          今日内容
         </view>
         <view class="time">
           <uni-easyinput type="textarea" v-model="events.content" :clearable="false"
@@ -22,7 +22,7 @@
       </view>
 
       <view class="formItem">
-        <view class="title">
+        <view class="title header">
           name
         </view>
         <view class="time">
@@ -31,7 +31,7 @@
       </view>
 
       <view class="formItem">
-        <view class="title">
+        <view class="title header">
           description
         </view>
 
@@ -41,7 +41,7 @@
         </view>
       </view>
       <view class="formItem">
-        <view class="title">
+        <view class="title header">
           tag1
         </view>
         <view class="time">
@@ -50,7 +50,7 @@
       </view>
 
       <view class="formItem">
-        <view class="title">
+        <view class="title header">
           tag2
         </view>
         <view class="time">
@@ -59,7 +59,7 @@
       </view>
 
       <view class="formItem">
-        <view class="title">
+        <view class="title header">
           tag3
         </view>
         <view class="time">
@@ -68,7 +68,7 @@
       </view>
 
       <view class="formItem">
-        <view class="title">
+        <view class="title header">
           tomorrow
         </view>
         <view class="time">
@@ -85,7 +85,6 @@
 </template>
 
 <script setup lang="ts">
-
 import {reactive, ref} from "vue";
 import dayjs from "dayjs";
 import api from "@/utils/api";
@@ -93,7 +92,7 @@ import CustomNavBar from "@/pages/index/components/customNavBar.vue";
 
 const now = dayjs();
 // 当前模式 view为浏览
-let flag = ref('view')
+let flag = ref('add')
 
 const time = ref('')
 const content = ref('')
@@ -111,8 +110,10 @@ const events = reactive({
 
 const post = async () => {
   console.log('post!')
+  const res = await api.postEvents(events)
+  console.log("res:")
+  console.log(res)
 
-  const res = await api.postEvents({})
 
 }
 
@@ -121,17 +122,14 @@ const init = () => {
   const year = now.year();
   const month = now.month() + 1; // 月份是从 0 开始的，所以需要加 1
   const date = now.date();
-  const hours = now.hour();
-  const minutes = now.minute();
-  const seconds = now.second();
-  time.value = `${year}-${month}-${date} ${hours}:${minutes}:${seconds}`
+  time.value = `${year}-${month}-${date}`
 }
 
 init()
 </script>
 
 <style scoped lang="less">
-.addEvents {
+.addEvents{
   .padding-lr-20();
   padding-bottom: 20vh;
 

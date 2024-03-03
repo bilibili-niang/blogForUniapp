@@ -1,26 +1,25 @@
 <template>
   <view class="mine">
-    <div class="ice-text">选择一个登录方式</div>
-    <uni-data-select
-        v-model="loginType"
-        :localdata="loginData"
-        @change="typeChange"
-        :clear="false"
-    ></uni-data-select>
+
 
     <div class="columnBlock"></div>
-    <div class="loginForm" v-if="loginType===0">
-      <uni-easyinput v-model="account.username" placeholder="账户"></uni-easyinput>
-      <div class="columnBlock"></div>
-      <uni-easyinput type="password" v-model="account.password" placeholder="密码"></uni-easyinput>
+    <div class="columnBlock"></div>
+
+    <!--使用账户密码登陆-->
+    <div v-if="!isWeixin">
+      <uni-easyinput v-model="accountForm.username" placeholder="账户"></uni-easyinput>
+      <uni-easyinput type="password" v-model="accountForm.password" placeholder="密码"></uni-easyinput>
       <div class="columnBlock"></div>
       <div class="mainBtn login" @click="accountbyLogin">登录</div>
       <div class="mainBtn login" @click="loginByToken">byToken</div>
-
-
     </div>
 
-    <div v-else>
+    <!--使用微信登陆-->
+    <div class="column justC" v-if="isWeixin">
+      <div class="ice-text">
+        通过微信登录
+      </div>
+      <div class="blockLine"></div>
       <view class="mainBtn" @tap="login">
         login
       </view>
@@ -41,6 +40,7 @@ import {ref} from "vue";
 import api from "@/utils/api";
 import verifyTools from '@/utils/verify/index.js'
 import piniaStore from '@/stores/index'
+
 let code = ref()
 
 const userInfo = ref()
@@ -95,14 +95,6 @@ let accountForm = ref({
   password: ''
 })
 
-let loginType = ref(0)
-const loginData = ref([
-  {value: 0, text: "账户登录"},
-  {value: 1, text: "微信登录"},
-])
-const typeChange = (e) => {
-  console.log(e)
-}
 // 控制是否可以点击登录
 let allowClick = ref(true);
 const accountbyLogin = () => {
@@ -181,6 +173,11 @@ const loginByToken = async () => {
     console.log(e)
   }
 }
+
+// 存储登陆方式
+const isWeixin = ref(false);
+// #ifdef MP-WEIXIN
+isWeixin.value = true;
 
 </script>
 

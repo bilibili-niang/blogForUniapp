@@ -19,3 +19,7 @@ dist
 *.njsproj
 *.sln
 *.sw?
+
+# Dependency directories
+jspm_packages/
+.vscode

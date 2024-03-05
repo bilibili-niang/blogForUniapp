@@ -1,27 +1,40 @@
 <template>
   <view class="itemCon">
-    <!--<image class="coverImg" mode="aspectFill" @error="errFun" :src="childrenItem.headImg"></image>-->
-    <!--<view class="coverBac"></view>-->
-    <view class="coverCon">
-      <view class="title">
-        {{ childrenItem.title }}
-      </view>
-      <view class="time">
-        {{ childrenItem.updatedAt }}
-      </view>
-      <view class="des">
-        {{ childrenItem.description ? childrenItem.description : '-' }}
-      </view>
-      <view class="operate">
-        <view @tap="goToRead(childrenItem.id)" class="mainBtn">read</view>
-      </view>
-    </view>
+    <div class="ice-column" @click="goToRead(childrenItem.id)">
+      <div class="ice-row margin-lr-10 margin-top-s">
+        <up-text :text="childrenItem.title" bold size="16"></up-text>
+      </div>
+      <div class="ice-row margin-lr-10 ">
+        <div class="ice-column w-70 alignS">
+          <up-text :lines="3" :text="childrenItem.description||'-'" size="14" color="#5e616d"></up-text>
+        </div>
+        <div class="ice-column w-30 hAuto">
+          <up-image :show-loading="true" radius="5px" :src="baseUrl+childrenItem.headImg"
+                    width="100px"
+                    height="100px"></up-image>
+        </div>
+      </div>
+      <div class="ice-row margin-bottom-m justB margin-lr-10">
+        <up-text :text="getTimeByStr(childrenItem.updatedAt)||'-'" size="12"></up-text>
+
+        <div class="ice-row margin-top-s">
+          <div class="ice-row margin-lr-10">
+            <u-icon name="thumb-up"></u-icon>
+            <up-text :text="childrenItem.praise || 0 " size="14" color="#5e616d"></up-text>
+          </div>
+          <div class="ice-row margin-lr-10">
+            <u-icon name="eye"></u-icon>
+            <up-text :text="childrenItem.view || 0" size="14" color="#5e616d"></up-text>
+          </div>
+        </div>
+      </div>
+    </div>
   </view>
 </template>
 
 <script setup lang="ts">
 import {ref} from "vue";
-import api from "@/utils/api";
+import {baseUrl} from "@/utils/api";
 
 const props = defineProps({
   item: {
@@ -45,6 +58,11 @@ const goToRead = (id: number) => {
 childrenItem.value = props.item
 // childrenItem.value.headImg = api.mainUrl + props.item?.headImg
 
+// 截取时间
+const getTimeByStr = (str: string): string => {
+  return str.slice(0, 10) + " " + str.slice(11, 16);
+};
+
 </script>
 
 <style scoped lang="less">
@@ -53,64 +71,6 @@ childrenItem.value = props.item
   margin-bottom: @margin-m;
   border-radius: @radio-ls;
   background-size: cover;
-  position: relative;
   background: @borderColor;
-
-
-  .coverImg{
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: flex;
-    height: 100%;
-    width: 100%;
-    border-radius: @radio-m;
-    z-index: -1;
-  }
-
-  .coverBac{
-    position: absolute;
-    display: flex;
-    width: 100%;
-    height: 100%;
-    filter: blur(50rpx);
-    z-index: 5;
-  }
-
-  .coverCon{
-    box-sizing: border-box;
-    z-index: 10;
-    width: 95%;
-    display: flex;
-    border-radius: @radio-ls;
-    .flex-row(column);
-    padding: @padding-s;
-    margin: @margin-s;
-    margin-top: 170rpx;
-    background: @bacColor;
-
-
-    .title, .time{
-      border-radius: @radio-ls;
-      z-index: 5;
-    }
-
-    .des{
-      z-index: 5;
-      font-size: @font-m;
-    }
-
-    .operate{
-      z-index: 5;
-      .flex-row();
-      width: 100%;
-      justify-content: flex-start;
-      margin-top: @margin-m;
-
-      /deep/ button{
-        margin: 0;
-      }
-    }
-  }
 }
 </style>

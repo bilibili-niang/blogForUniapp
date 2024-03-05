@@ -3,82 +3,69 @@
   <view class="addEvents">
     <view class="formLim" v-if="flag==='add'">
       <view class="formItem">
-        <view class="title header">
-          今日时间
-        </view>
-        <view class="time">
-          {{ time }}
-        </view>
+        <div class="ice-row alignC">
+          <div class="ice-tag">time</div>
+          <view class="ice-tag">
+            {{ time }}
+          </view>
+        </div>
       </view>
 
       <view class="formItem">
-        <view class="title header">
-          今日内容
-        </view>
+        <div class="ice-tag">今日内容</div>
         <view class="time">
           <uni-easyinput type="textarea" v-model="events.content" :clearable="false"
                          placeholder="请输入内容"></uni-easyinput>
         </view>
       </view>
-
+      <!--<view class="formItem">
+              <view class="title header">
+                name
+              </view>
+              <view class="time">
+                <uni-easyinput v-model="events.name" :clearable="false" placeholder="请输入内容"></uni-easyinput>
+              </view>
+            </view>-->
       <view class="formItem">
-        <view class="title header">
-          name
-        </view>
-        <view class="time">
-          <uni-easyinput v-model="events.name" :clearable="false" placeholder="请输入内容"></uni-easyinput>
-        </view>
-      </view>
-
-      <view class="formItem">
-        <view class="title header">
-          description
-        </view>
-
+        <div class="ice-tag">description</div>
         <view class="time">
           <uni-easyinput type="textarea" :clearable="false" v-model="events.description"
                          placeholder="请输入内容"></uni-easyinput>
         </view>
       </view>
-      <view class="formItem">
-        <view class="title header">
-          tag1
-        </view>
-        <view class="time">
-          <uni-easyinput v-model="events.tag1" :clearable="false" placeholder="请输入内容"></uni-easyinput>
-        </view>
+
+      <view class="formItem ice-row">
+        <div class="ice-column">
+          <div class="ice-tag">tag1</div>
+          <view class="time">
+            <uni-easyinput v-model="events.tag1" :clearable="false" placeholder="请输入内容"></uni-easyinput>
+          </view>
+        </div>
+        <div class="blockVertical"></div>
+        <div class="ice-column">
+          <div class="ice-tag">tag2</div>
+          <view class="time">
+            <uni-easyinput v-model="events.tag2" :clearable="false" placeholder="请输入内容"></uni-easyinput>
+          </view>
+        </div>
+        <div class="blockVertical"></div>
+        <div class="ice-column">
+          <div class="ice-tag">tag3</div>
+          <view class="time">
+            <uni-easyinput v-model="events.tag3" :clearable="false" placeholder="请输入内容"></uni-easyinput>
+          </view>
+        </div>
       </view>
 
-      <view class="formItem">
-        <view class="title header">
-          tag2
-        </view>
-        <view class="time">
-          <uni-easyinput v-model="events.tag2" :clearable="false" placeholder="请输入内容"></uni-easyinput>
-        </view>
-      </view>
-
-      <view class="formItem">
-        <view class="title header">
-          tag3
-        </view>
-        <view class="time">
-          <uni-easyinput v-model="events.tag3" :clearable="false" placeholder="请输入内容"></uni-easyinput>
-        </view>
-      </view>
-
-      <view class="formItem">
-        <view class="title header">
-          tomorrow
-        </view>
+      <div class="ice-column">
+        <div class="ice-tag">tomorrow</div>
         <view class="time">
           <uni-easyinput v-model="events.tomorrow" :clearable="false" placeholder="请输入内容"></uni-easyinput>
         </view>
-      </view>
+      </div>
+
       <view class="btns">
-        <view class="mainBtn" @tap="post">
-          post!
-        </view>
+        <up-button type="primary" text="提交" @click="post" :disable="allowClick"></up-button>
       </view>
     </view>
   </view>
@@ -99,22 +86,36 @@ const content = ref('')
 
 const events = reactive({
   op: "add",
-  name: "今日测试事件",
-  description: "这个是测试事件的描述",
-  content: "今天还是写代码发呆,困得很,一直在看代码,bug真多,不知道到明天有多困",
-  tag1: "today",
-  tag2: "nothing",
-  tag3: "上班",
-  tomorrow: "暂无计划,明天周五,看地狱乐,打游戏"
+  name: "",
+  description: "",
+  content: "",
+  tag1: "",
+  tag2: "",
+  tag3: "",
+  tomorrow: ""
 })
 
+const allowClick = ref(false);
+
 const post = async () => {
+  allowClick.value = !allowClick.value;
   console.log('post!')
-  const res = await api.postEvents(events)
-  console.log("res:")
-  console.log(res)
-
-
+  const res = await api.postEvents({
+    ...events,
+    token: uni.getStorageSync('token') || ""
+  })
+  if (res.success) {
+    // 弹窗,创建成功
+    uni.showToast({
+      title: '创建成功',
+      icon: 'success'
+    })
+  } else {
+    uni.showToast({
+      title: '创建失败',
+      icon: 'error'
+    })
+  }
 }
 
 

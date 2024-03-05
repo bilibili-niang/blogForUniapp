@@ -1,62 +1,65 @@
 <template>
   <view class="mine">
-
-
-    <div class="columnBlock"></div>
-    <div class="columnBlock"></div>
-
-    <!--使用账户密码登陆-->
-    <div v-if="!isWeixin">
-      <uni-easyinput v-model="accountForm.username" placeholder="账户"></uni-easyinput>
-      <uni-easyinput type="password" v-model="accountForm.password" placeholder="密码"></uni-easyinput>
+    <div class="ice-column" v-if="loginState">
+      <userDetail :data="userInfo"/>
       <div class="columnBlock"></div>
-      <div class="mainBtn login" @click="accountbyLogin">登录</div>
-      <div class="mainBtn login" @click="loginByToken">byToken</div>
     </div>
 
-    <!--使用微信登陆-->
-    <div class="column justC" v-if="isWeixin">
-      <div class="ice-text">
-        通过微信登录
+    <!--没有用户登陆时-->
+    <div class="ice-column" v-if="!loginState">
+      <!--使用账户密码登陆-->
+      <div v-if="!isWeixin">
+        <uni-easyinput v-model="accountForm.username" placeholder="账户"></uni-easyinput>
+        <uni-easyinput type="password" v-model="accountForm.password" placeholder="密码"></uni-easyinput>
+        <div class="columnBlock"></div>
+        <div class="mainBtn login" @click="accountbyLogin">登录</div>
+        <div class="mainBtn login" @click="loginByToken">byToken</div>
       </div>
-      <div class="blockLine"></div>
-      <view class="mainBtn" @tap="login">
-        login
-      </view>
-      <!--{{ openIdList }}:-->
-      <view class="openIdList">
-        <view class="item">
 
-        </view>
-      </view>
+      <!--使用微信登陆-->
+      <div class="column justC" v-if="isWeixin">
+        <div class="ice-text">
+          通过微信登录
+        </div>
+        <div class="blockLine"></div>
+        <up-button type="primary" class="mainBtn" text="登录" @click="login" :disabled="allowClick"></up-button>
+      </div>
     </div>
-
 
   </view>
 </template>
 
 <script setup lang="ts">
-import {ref} from "vue";
+import {computed, ref} from "vue";
 import api from "@/utils/api";
 import verifyTools from '@/utils/verify/index.js'
-import piniaStore from '@/stores/index'
+import {useMemberStore} from '@/stores/index'
+import userDetail from './src/userDetail/index.vue'
+
+const memberStore = useMemberStore();
 
 let code = ref()
 
 const userInfo = ref()
+
+// 微信登陆
 const login = () => {
+  allowClick.value = true
   uni.login({
     provider: 'weixin', //使用微信登录
     onlyAuthorize: true,
     success: async function (loginRes) {
+      allowClick.value = false
       code.value = loginRes.code
       const res = await api.login({
         code: code.value
       })
       if (res.success) {
         userInfo.value = res.result
-        delete res.result.realPassword
         uni.setStorageSync('user', res.result)
+        uni.setStorageSync('token', res.result.token)
+        // 写入pinia
+        memberStore.setProfile(res.result)
         uni.showToast({
           title: '登录成功',
           icon: 'success'
@@ -69,23 +72,9 @@ const login = () => {
       }
     },
     fail: function (err) {
+      allowClick.value = false
       console.log('err')
       console.log(err);
-    }
-  })
-}
-
-let rawData = ref("")
-const getInfo = () => {
-  uni.getUserProfile({
-    desc: '请登录',
-    lang: 'zh_CN',
-    fail: function (res) {
-      console.log('登录失败')
-      console.log(res);
-    },
-    success: async function (res) {
-      rawData.value = JSON.parse(res.rawData)
     }
   })
 }
@@ -96,7 +85,8 @@ let accountForm = ref({
 })
 
 // 控制是否可以点击登录
-let allowClick = ref(true);
+let allowClick = ref(false);
+// 账户密码登陆
 const accountbyLogin = () => {
   const verifyRes = verifyTools.commonVerify({
     username: {
@@ -120,6 +110,7 @@ const accountbyLogin = () => {
         })
         // 将 res.result 写入token
         uni.setStorageSync('token', res.result.token)
+        uni.setStorageSync('user', res.result)
         allowClick.value = true
       } else {
         // 登录失败
@@ -152,19 +143,10 @@ const loginByToken = async () => {
         tokenStr = res.data + '';
         if (tokenStr) {
           // 假设这里有一个函数getUserInfoByToken用于通过token获取用户信息
-          const userInfo = await api.getUserInfoByToken(tokenStr);
-          console.log("userInfo:")
-          console.log(userInfo.result.res);
+          const data = await api.getUserInfoByToken(tokenStr);
+          userInfo.value = data.result.res;
           // 写入pinia
-          console.log("piniaStore")
-
-          console.log(piniaStore);
-
-
-          /*if (userInfo.success) {
-            accountModel = userInfo.result.res;
-          }*/
-
+          memberStore.setProfile(data.result.res)
         }
 
       }
@@ -174,11 +156,16 @@ const loginByToken = async () => {
   }
 }
 
+loginByToken();
+
 // 存储登陆方式
 const isWeixin = ref(false);
 // #ifdef MP-WEIXIN
 isWeixin.value = true;
 
+const loginState = computed(() => {
+  return !!uni.getStorageSync('token')
+})
 </script>
 
 <style scoped lang="less">

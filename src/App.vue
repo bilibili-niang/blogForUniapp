@@ -43,5 +43,4 @@ onHide(() => {
 #app{
   margin-bottom: 10vh;
 }
-
 </style>

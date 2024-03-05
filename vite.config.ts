@@ -12,6 +12,9 @@ export default defineConfig({
                 javascriptEnabled: true,
                 // @ts-ignore
                 additionalData: `@import "${path.resolve(__dirname, 'src/static/css/common.less')}";@import "${path.resolve(__dirname, 'src/static/css/variable.less')}";`
+            },
+            scss: {
+                // additionalData: `@import "uview-plus/index.scss";`,
             }
         }
     },

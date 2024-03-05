@@ -3,7 +3,10 @@
     "autoscan": true,
     "custom": {
       "^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue",
-      "^ice-(.*)": "@/components/ice$1.vue"
+      "^ice-(.*)": "@/components/ice$1.vue",
+      "^u--(.*)": "uview-plus/components/u-$1/u-$1.vue",
+      "^up-(.*)": "uview-plus/components/u-$1/u-$1.vue",
+      "^u-([^-].*)": "uview-plus/components/u-$1/u-$1.vue"
     }
   },
   "pages": [
@@ -37,14 +40,21 @@
     {
       "path": "pages/addEvents/index",
       "style": {
-        "navigationBarTitleText": "今日",
-        "enablePullDownRefresh": true
+        "navigationBarTitleText": "今日"
       }
     },
     {
       "path": "pages/list/index",
       "style": {
         "navigationBarTitleText": "列表",
+        "enablePullDownRefresh": true,
+        "onReachBottomDistance": 200
+      }
+    },
+    {
+      "path": "pages/eventsList/index",
+      "style": {
+        "navigationBarTitleText": "昨天",
         "enablePullDownRefresh": true,
         "onReachBottomDistance": 200
       }
@@ -80,16 +90,22 @@
         "selectedIconPath": "static/icon/indexActive.png"
       },
       {
+        "pagePath": "pages/list/index",
+        "text": "列表",
+        "iconPath": "static/icon/list.png",
+        "selectedIconPath": "static/icon/listActive.png"
+      },
+      {
         "pagePath": "pages/addEvents/index",
         "text": "今日",
         "iconPath": "static/icon/today.png",
         "selectedIconPath": "static/icon/todayActive.png"
       },
       {
-        "pagePath": "pages/list/index",
-        "text": "列表",
-        "iconPath": "static/icon/list.png",
-        "selectedIconPath": "static/icon/listActive.png"
+        "pagePath": "pages/eventsList/index",
+        "text": "昨天",
+        "iconPath": "static/icon/eventsList.png",
+        "selectedIconPath": "static/icon/eventsListActive.png"
       },
       {
         "pagePath": "pages/mine/index",

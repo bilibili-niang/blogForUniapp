@@ -24,6 +24,11 @@ const pageNum = ref(1)
 const pageSize = ref(20)
 
 const init = async () => {
+  // 加载弹窗
+  uni.showToast({
+    icon: 'loading',
+    title: 'loading...'
+  })
   const res = await api.home({
     pageNum: pageNum.value,
     pageSize: pageSize.value
@@ -53,14 +58,14 @@ onPullDownRefresh(() => {
   init()
 })
 
-
 init()
 </script>
 
 <style scoped lang="less">
 .list{
   background: @borderColor;
-  .padding-top-l();
+  .padding-lr-10();
 }
-
+.waitBlock{
+}
 </style>

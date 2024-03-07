@@ -6,8 +6,8 @@ import events from "./events";
 import user from "./user";
 
 // 服务器开发
-export const baseUrl: String = `https://blog.icestone.work`;
-// export const baseUrl: String = `http://localhost:89`;
+// export const baseUrl: String = `https://blog.icestone.work`;
+export const baseUrl: String = `http://localhost:89`;
 
 // 添加拦截器
 const httpInterceptor = {
@@ -35,7 +35,6 @@ export const http = <T>(options: UniApp.RequestOptions) => {
     // @date 2023/9/5 @time 10:35 , @author 张嘉凯
     // TODO 微信小程序开发把下面的配置打开
     options.url = options.url.replace('/api', baseUrl as string)
-
     return new Promise<Data<T>>((resolve, reject) => {
         uni.request({
             ...options,

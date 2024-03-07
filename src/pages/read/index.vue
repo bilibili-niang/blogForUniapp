@@ -1,11 +1,9 @@
 <template>
   <view class="read">
-    <view class="title">
-      {{ data?.title }}
-    </view>
-    <view class="time">
-      {{ data?.updatedAt }}
-    </view>
+    <div class="ice-row margin-lr-10 margin-top-s">
+      <up-text :lines="1" :text="data.title" bold size="16"></up-text>
+    </div>
+    <up-text :text="getTimeByStr(data.updatedAt)||'-'" size="12"></up-text>
     <view class="content markdown" v-html="content">
 
     </view>
@@ -20,8 +18,7 @@
 import {nextTick, ref} from "vue";
 import {onLoad, onPullDownRefresh} from "@dcloudio/uni-app";
 import api from "@/utils/api";
-import TabBar from "@/components/common/tabBar/tabBar.vue";
-
+import {getTimeByStr} from '@/utils/tools'
 
 const data = ref()
 const id = ref()
@@ -57,7 +54,12 @@ nextTick(() => {
 </script>
 
 <style scoped lang="less">
-.read {
+.read{
   .padding-lr-20();
+}
+.content{
+  background: @borderColor;
+  border-radius: @radio-s;
+  margin-bottom: @margin-m;
 }
 </style>

@@ -59,9 +59,8 @@ init()
 
 <style scoped lang="less">
 .list{
-  .content{
-    .padding-lr-20();
-  }
+  background: @borderColor;
+  .padding-top-l();
 }
 
 </style>

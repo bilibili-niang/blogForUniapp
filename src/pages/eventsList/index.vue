@@ -4,20 +4,27 @@
       <div class="ice-column eventItem margin-top-l">
         <u-divider :text="item.name" textPosition="left"></u-divider>
         <div class="ice-column">
-          <u-tag text="description" plain size="mini" :bgColor="borderColor" :borderColor="borderColor"></u-tag>
+          <div class="ice-row">
+            <u-text text="description"></u-text>
+          </div>
           <up-text :text="getTimeByStr(item.description)"></up-text>
           <div class="blockLine"></div>
-          <u-tag text="content" plain size="mini" :bgColor="borderColor" :borderColor="borderColor"></u-tag>
+          <div class="ice-row">
+            <u-text text="content"></u-text>
+          </div>
           <up-text :text="getTimeByStr(item.content)"></up-text>
         </div>
         <div class="ice-row margin-top-s justB">
           <up-text :text="getTimeByStr(item.createdAt)"></up-text>
-          <div class="ice-row ">
-            <u-tag :text="item.tag1" plain size="mini" :bgColor="borderColor" :borderColor="borderColor" v-if="item.tag1"></u-tag>
+          <div class="ice-row">
+            <u-tag :text="item.tag1" size="mini" :bgColor="borderColor" :borderColor="borderColor"
+                   v-if="item.tag1"></u-tag>
             <div class="blockVertical"></div>
-            <u-tag :text="item.tag2" plain size="mini" :bgColor="borderColor" :borderColor="borderColor" v-if="item.tag2"></u-tag>
+            <u-tag :text="item.tag2" size="mini" :bgColor="borderColor" :borderColor="borderColor"
+                   v-if="item.tag2"></u-tag>
             <div class="blockVertical"></div>
-            <u-tag :text="item.tag3" plain size="mini" :bgColor="borderColor" :borderColor="borderColor" v-if="item.tag3"></u-tag>
+            <u-tag :text="item.tag3" size="mini" :bgColor="borderColor" :borderColor="borderColor"
+                   v-if="item.tag3"></u-tag>
           </div>
         </div>
         <hr>

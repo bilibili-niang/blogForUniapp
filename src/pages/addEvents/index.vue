@@ -65,7 +65,7 @@
       </div>
 
       <view class="btns">
-        <up-button type="primary" text="提交" @click="post" :disable="allowClick"></up-button>
+        <up-button text="提交" @click="post" :disable="allowClick"></up-button>
       </view>
     </view>
   </view>

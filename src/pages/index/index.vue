@@ -1,11 +1,21 @@
 <template>
   <customNavBar :back="false" title="首页"></customNavBar>
   <view class="container">
-    <recommendMarkdown :list="loopItem" :activeIndex="activeIndex"></recommendMarkdown>
+    <!--<recommendMarkdown :list="loopItem" :activeIndex="activeIndex"></recommendMarkdown>-->
     <!--分类-->
     <!--<classify :item="classifyItem"></classify>-->
   </view>
   <!--<tabBar/>-->
+  <template v-for="(item,index) in dataList" :key="index">
+    <div v-if="item.type==='music'" class="cardLim">
+      <musicCard :item="item"></musicCard>
+      <div class="ice-column">
+        <up-text :text="item.title+'-'+item.author"></up-text>
+        <up-text :text="item.descriptions"></up-text>
+      </div>
+    </div>
+
+  </template>
 
 </template>
 
@@ -13,11 +23,10 @@
 import CustomNavBar from "@/pages/index/components/customNavBar.vue";
 import {ref} from "vue";
 import api from "@/utils/api";
-import RecommendMarkdown from "@/pages/index/components/recommendMarkdown.vue";
 import {onPullDownRefresh} from "@dcloudio/uni-app";
+import MusicCard from "@/pages/index/components/music/index.vue";
 
 let loopItem = ref<any>([])
-const activeIndex = ref(0)
 
 const content = ref('')
 
@@ -52,6 +61,37 @@ const random = async () => {
     content.value = contentTemp.result + ''
   }
 }
+
+
+let dataList = [
+  {
+    url: "/collectible/ding.png",
+    id: 1,
+    type: "card",
+    title: "群 丁真",
+    descriptions: "二十一世纪的理塘王,曾有无数人挑战丁真的地位,但都在他的雪豹面前败下阵来.成名绝技:闭嘴,雪豹"
+  },
+  {
+    url: "/collectible/gotSmoke.mp3",
+    id: 2,
+    type: "music",
+    title: "I Got Smoke",
+    author: "V在燃烧",
+    authorUrl: "/",
+    coverImg: "collectible/1.png",
+    descriptions: "你拿什么和我丁真拼?"
+  },
+  {
+    url: "/collectible/video2.mp4",
+    id: 2,
+    type: "music",
+    title: "如翁",
+    author: "石岩",
+    authorUrl: "/",
+    coverImg: "collectible/2.png",
+    descriptions: "没有小众的音乐，只有迟到的听众"
+  },
+];
 
 init()
 </script>

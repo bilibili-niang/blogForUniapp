@@ -11,6 +11,11 @@
         </div>
       </div>
     </div>
+
+    <div class="operate ice-row justStart margin-bottom-l">
+      <u-button text="点赞" icon="thumb-up" @click="praise"></u-button>
+    </div>
+
     <view class="content markdown" v-html="content">
 
     </view>
@@ -65,6 +70,10 @@ nextTick(() => {
 const imgUrl = computed(() => {
   return baseUrl + userData.value.avatar;
 })
+// 点赞
+const praise = () => {
+
+}
 
 </script>
 

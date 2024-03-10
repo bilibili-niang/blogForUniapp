@@ -68,10 +68,15 @@ init();
 <style scoped lang="less">
 .eventsList{
   width: 100%;
+  background: @borderColor;
 
   .eventItem{
-    .margin-top-m();
+    .margin-top-l();
     .margin-lr-10();
+    padding: @padding-m;
+    background: white;
+    border-radius: @radio-m;
+    margin-bottom: @margin-m;
   }
 }
 

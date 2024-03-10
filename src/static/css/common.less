@@ -197,6 +197,10 @@
 .ice-row{
   .row();
 }
+.ice-row-reverse{
+  display: flex;
+  flex-direction: row-reverse;
+}
 .ice-text{
   display: flex;
   flex-direction: row;
@@ -219,4 +223,11 @@
 }
 hr{
   border-bottom: @borderColor 1px solid;
+}
+.bottom-themeColor{
+  border-bottom: 1px @themeColor solid;
+  padding-bottom: 10rpx;
+}
+.u-button{
+  width: auto !important;
 }

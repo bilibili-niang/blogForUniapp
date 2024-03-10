@@ -4,20 +4,20 @@
       <div class="ice-column eventItem margin-top-l">
         <u-divider :text="item.name" textPosition="left"></u-divider>
         <div class="ice-column">
-          <u-tag text="description" plain size="mini"></u-tag>
+          <u-tag text="description" plain size="mini" :bgColor="borderColor" :borderColor="borderColor"></u-tag>
           <up-text :text="getTimeByStr(item.description)"></up-text>
           <div class="blockLine"></div>
-          <u-tag text="content" plain size="mini"></u-tag>
+          <u-tag text="content" plain size="mini" :bgColor="borderColor" :borderColor="borderColor"></u-tag>
           <up-text :text="getTimeByStr(item.content)"></up-text>
         </div>
         <div class="ice-row margin-top-s justB">
           <up-text :text="getTimeByStr(item.createdAt)"></up-text>
           <div class="ice-row ">
-            <u-tag :text="item.tag1" plain size="mini" v-if="item.tag1"></u-tag>
+            <u-tag :text="item.tag1" plain size="mini" :bgColor="borderColor" :borderColor="borderColor" v-if="item.tag1"></u-tag>
             <div class="blockVertical"></div>
-            <u-tag :text="item.tag2" plain size="mini" v-if="item.tag2"></u-tag>
+            <u-tag :text="item.tag2" plain size="mini" :bgColor="borderColor" :borderColor="borderColor" v-if="item.tag2"></u-tag>
             <div class="blockVertical"></div>
-            <u-tag :text="item.tag3" plain size="mini" v-if="item.tag3"></u-tag>
+            <u-tag :text="item.tag3" plain size="mini" :bgColor="borderColor" :borderColor="borderColor" v-if="item.tag3"></u-tag>
           </div>
         </div>
         <hr>
@@ -29,7 +29,7 @@
 <script setup lang="ts">
 import {ref} from 'vue';
 import api from "@/utils/api/index";
-import {getTimeByStr} from "@/utils/tools";
+import {borderColor, getTimeByStr} from "@/utils/tools";
 
 const dataList = ref([]);
 

@@ -18,3 +18,4 @@ export const findColor = function (pinyin: any): any {
     const obj = colorsMap[pinyin];
     return obj || false;
 };
+export const borderColor = "#ccccd6";

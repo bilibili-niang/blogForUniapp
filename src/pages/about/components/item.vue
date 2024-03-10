@@ -42,13 +42,13 @@
         </div>
 
         <div class="ice-row">
-          <u-tag :text="childrenItem.tag1" size="mini" bgColor="#ccccd6" borderColor="#ccccd6"
+          <u-tag :text="childrenItem.tag1" size="mini" :bgColor="borderColor" :borderColor="borderColor"
                  v-if="childrenItem.tag1"></u-tag>
           <div class="blockVertical" v-if="childrenItem.tag1"></div>
-          <u-tag :text="childrenItem.tag2" size="mini" bgColor="#ccccd6" borderColor="#ccccd6"
+          <u-tag :text="childrenItem.tag2" size="mini" :bgColor="borderColor" :borderColor="borderColor"
                  v-if="childrenItem.tag2"></u-tag>
           <div class="blockVertical" v-if="childrenItem.tag2"></div>
-          <u-tag :text="childrenItem.tag3" size="mini" bgColor="#ccccd6" borderColor="#ccccd6"
+          <u-tag :text="childrenItem.tag3" size="mini" :bgColor="borderColor" :borderColor="borderColor"
                  v-if="childrenItem.tag2"></u-tag>
         </div>
 
@@ -60,7 +60,7 @@
 <script setup lang="ts">
 import {ref} from "vue";
 import {baseUrl} from "@/utils/api";
-import {getTimeByStr} from '@/utils/tools'
+import {borderColor, getTimeByStr} from '@/utils/tools'
 
 const props = defineProps({
   item: {

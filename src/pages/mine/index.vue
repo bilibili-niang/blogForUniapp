@@ -1,12 +1,12 @@
 <template>
   <view class="mine">
-    <div class="ice-column" v-if="loginState">
+    <div class="ice-column" v-if="userInfo">
       <userDetail :data="userInfo"/>
       <div class="columnBlock"></div>
     </div>
 
     <!--没有用户登陆时-->
-    <div class="ice-column" v-if="!loginState">
+    <div class="ice-column" v-if="!userInfo">
       <!--使用账户密码登陆-->
       <div v-if="!isWeixin">
         <uni-easyinput v-model="accountForm.username" placeholder="账户"></uni-easyinput>
@@ -18,11 +18,9 @@
 
       <!--使用微信登陆-->
       <div class="column justC" v-if="isWeixin">
-        <div class="ice-text">
-          通过微信登录
-        </div>
+        <up-text text="通过微信登录"></up-text>
         <div class="blockLine"></div>
-        <up-button type="primary" class="mainBtn" text="登录" @click="login" :disabled="allowClick"></up-button>
+        <up-button class="mainBtn" text="登录" @click="login" :disabled="allowClick"></up-button>
       </div>
     </div>
 

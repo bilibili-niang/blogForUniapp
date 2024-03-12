@@ -18,13 +18,13 @@
           <up-text :text="getTimeByStr(item.createdAt)"></up-text>
           <div class="ice-row">
             <u-tag :text="item.tag1" size="mini" :bgColor="borderColor" :borderColor="borderColor"
-                   v-if="item.tag1"></u-tag>
-            <div class="blockVertical"></div>
+                   v-if="item.tag1!==''"></u-tag>
+            <div class="blockVertical">2</div>
             <u-tag :text="item.tag2" size="mini" :bgColor="borderColor" :borderColor="borderColor"
-                   v-if="item.tag2"></u-tag>
-            <div class="blockVertical"></div>
+                   v-if="item.tag2!==''"></u-tag>
+            <div class="blockVertical">3</div>
             <u-tag :text="item.tag3" size="mini" :bgColor="borderColor" :borderColor="borderColor"
-                   v-if="item.tag3"></u-tag>
+                   v-if="item.tag3.length>0"></u-tag>
           </div>
         </div>
         <hr>

@@ -2,14 +2,19 @@
   <customNavBar :back="false" :title="'事件'+flag"></customNavBar>
   <view class="addEvents">
     <view class="formLim" v-if="flag==='add'">
-      <view class="formItem">
-        <div class="ice-row alignC">
-          <div class="ice-tag">time</div>
-          <view class="ice-tag">
-            {{ time }}
-          </view>
-        </div>
-      </view>
+      <div class="ice-row alignC">
+        <div class="ice-tag">time</div>
+        <view class="ice-tag">
+          {{ time }}
+        </view>
+      </div>
+
+      <div class="ice-row alignC">
+        <div class="ice-tag">天气</div>
+        <view class="ice-tag">
+          {{ weather }}
+        </view>
+      </div>
 
       <view class="formItem">
         <div class="ice-tag">今日内容</div>
@@ -126,6 +131,19 @@ const init = () => {
   time.value = `${year}-${month}-${date}`
 }
 
+// 获取今日天气
+const weather = ref();
+const getWeather = async () => {
+  const res = await uniCloud.callFunction({
+    name: 'getWeather',
+    data: {
+      city: '北京'
+    }
+  })
+  weather.value = res.result.data.weather
+  console.log(weather.value)
+}
+getWeather();
 init()
 </script>
 

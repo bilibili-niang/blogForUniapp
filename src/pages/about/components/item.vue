@@ -82,7 +82,6 @@ const goToRead = (id: number) => {
 }
 
 childrenItem.value = props.item
-// childrenItem.value.headImg = api.mainUrl + props.item?.headImg
 
 </script>
 

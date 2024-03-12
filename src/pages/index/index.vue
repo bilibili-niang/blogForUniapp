@@ -1,127 +1,44 @@
 <template>
-  <customNavBar :back="false" title="首页"></customNavBar>
-  <view class="container">
-    <!--<recommendMarkdown :list="loopItem" :activeIndex="activeIndex"></recommendMarkdown>-->
-    <!--分类-->
-    <!--<classify :item="classifyItem"></classify>-->
-  </view>
-  <!--<tabBar/>-->
-  <template v-for="(item,index) in dataList" :key="index">
-    <div v-if="item.type==='music'" class="cardLim">
-      <musicCard :item="item"></musicCard>
-      <div class="ice-column">
-        <up-text :text="item.title+'-'+item.author"></up-text>
-        <up-text :text="item.descriptions"></up-text>
-      </div>
-    </div>
+  <div class="indexPage">
 
-  </template>
+
+  </div>
 
 </template>
 
 <script setup lang="ts">
-import CustomNavBar from "@/pages/index/components/customNavBar.vue";
-import {ref} from "vue";
-import api from "@/utils/api";
-import {onPullDownRefresh} from "@dcloudio/uni-app";
-import MusicCard from "@/pages/index/components/music/index.vue";
+import {reactive} from 'vue';
 
-let loopItem = ref<any>([])
-
-const content = ref('')
-
-// 下拉触发获取随机文章
-onPullDownRefresh(() => {
-  random()
-})
-
-// 分类列表
-const classifyItem = ref<any>([])
-
-// 随机的一条数据
-const randomOne = ref()
-
-// 初始化方法
-const init = async () => {
-  const res = await api.homeRecommend()
-  loopItem.value = res.result
-  const tags = await api.allTags()
-  classifyItem.value = tags.result
-  await random();
-}
-
-const random = async () => {
-  const random = await api.getRandomOne()
-  if (random) {
-    uni.stopPullDownRefresh();
-  }
-  randomOne.value = random.result
-  const contentTemp = await api.getMarkdownContent({id: randomOne.value.id})
-  if (contentTemp.success) {
-    content.value = contentTemp.result + ''
-  }
-}
+const viewData = reactive([])
+// 节假日列表
+const festivals = reactive([
+  {id: '0', name: '下班', type: '3', date: ''},
+  {id: '1', name: '下一个周末', type: '2', date: ''},
+  {id: '2', name: '清明节', type: '1', date: '2024.4.4'},
+  {id: '3', name: '劳动节', type: '1', date: '2024.5.5'},
+  {id: '4', name: '端午节', type: '1', date: '2024.6.10'},
+  {id: '5', name: '中秋节', type: '1', date: '2024.9.16'},
+  {id: '6', name: '国庆节', type: '1', date: '2024.10.1'},
+  {id: '7', name: '元旦节', type: '1', date: '2025.1.1'},
+  {id: '8', name: '除夕', type: '1', date: '2025.1.28'},
+  {id: '9', name: '春节', type: '1', date: '2025.1.29'},
+])
 
 
-let dataList = [
-  {
-    url: "/collectible/ding.png",
-    id: 1,
-    type: "card",
-    title: "群 丁真",
-    descriptions: "二十一世纪的理塘王,曾有无数人挑战丁真的地位,但都在他的雪豹面前败下阵来.成名绝技:闭嘴,雪豹"
-  },
-  {
-    url: "/collectible/gotSmoke.mp3",
-    id: 2,
-    type: "music",
-    title: "I Got Smoke",
-    author: "V在燃烧",
-    authorUrl: "/",
-    coverImg: "collectible/1.png",
-    descriptions: "你拿什么和我丁真拼?"
-  },
-  {
-    url: "/collectible/video2.mp4",
-    id: 2,
-    type: "music",
-    title: "如翁",
-    author: "石岩",
-    authorUrl: "/",
-    coverImg: "collectible/2.png",
-    descriptions: "没有小众的音乐，只有迟到的听众"
-  },
-];
-
-init()
 </script>
+
 <style scoped lang="less">
-.container{
-  padding-bottom: 10vh;
+.indexPage{
 }
-
-.content{
+.list{
+  display: grid;
+  grid-template-columns: 160px 160px;
+}
+.item-left{
+  width: 180px;
+}
+.item-date-time{
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  background: @bacColor-bleak;
+  justify-content: flex-end;
 }
-
-.text-area{
-  display: flex;
-  justify-content: center;
-}
-
-.description{
-  margin-bottom: @margin-l;
-}
-
-.item{
-  .flex-row();
-  width: 100%;
-  justify-content: space-evenly;
-}
-
 </style>

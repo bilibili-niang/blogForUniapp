@@ -4,7 +4,6 @@
       <userDetail :data="userInfo"/>
       <div class="columnBlock"></div>
     </div>
-
     <!--没有用户登陆时-->
     <div class="ice-column" v-if="!userInfo">
       <!--使用账户密码登陆-->
@@ -17,7 +16,7 @@
       </div>
 
       <!--使用微信登陆-->
-      <div class="column justC" v-if="isWeixin">
+      <div class="column justC" v-else>
         <up-text text="通过微信登录"></up-text>
         <div class="blockLine"></div>
         <up-button class="mainBtn" text="登录" @click="login" :disabled="allowClick"></up-button>
@@ -159,8 +158,9 @@ loginByToken();
 // 存储登陆方式
 const isWeixin = ref(false);
 // #ifdef MP-WEIXIN
+console.log("微信平台")
 isWeixin.value = true;
-
+// #endif
 const loginState = computed(() => {
   return !!uni.getStorageSync('token')
 })

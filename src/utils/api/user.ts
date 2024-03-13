@@ -35,5 +35,14 @@ export default {
             },
             method: 'POST'
         })
+    },
+    /**
+     * 成为admin用户
+     */
+    async becomeAdmin() {
+        return http({
+            url: '/api/user/becomeAdmin',
+            method: 'POST'
+        })
     }
 }

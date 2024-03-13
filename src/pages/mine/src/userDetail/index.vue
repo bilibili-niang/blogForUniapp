@@ -7,7 +7,7 @@ export default defineComponent({
 </script>
 <script setup lang="ts">
 import {defineProps, computed, ref} from 'vue';
-import {baseUrl} from "@/utils/api";
+import api, {baseUrl} from "@/utils/api";
 
 const props = defineProps({
   data: {
@@ -60,6 +60,31 @@ const logOut = () => {
   }
 }
 
+// 成为admin!
+const beAdmin = async () => {
+  await api.becomeAdmin()
+      .then(res => {
+        console.log("res:")
+        console.log(res)
+      })
+      .catch(e => {
+        console.log("e:")
+        console.log(e)
+      })
+}
+
+/**
+ * 绑定pc端网站的账号
+ */
+const bindWebAccount = () => {
+// 跳转页面
+  uni.navigateTo({
+    url: '/pages/bindWebAccount/index'
+  })
+
+
+}
+
 // 查看头像
 const avatarClick = () => {
   uni.previewImage({
@@ -73,7 +98,6 @@ const avatarClick = () => {
 <template>
   <div class="userInfo">
     <div class="ice-column">
-
       <div class="ice-row margin-top-s margin-lr-10">
         <up-image :show-loading="true" :src="imgUrl" width="80px" height="80px"
                   @click="avatarClick" shape="circle"></up-image>
@@ -94,15 +118,20 @@ const avatarClick = () => {
           <u-button class="btnWidth" text="设置" @click="showPopup = true"></u-button>
         </div>
       </div>
-
     </div>
   </div>
 
   <u-popup :show="showPopup" mode="top" safeAreaInsetTop :round="10" @close="close" @open="open">
     <view>
-      <div class="ice-row-reverse bottom-themeColor">
-        <div class="ice-row">
+      <div class="ice-column alignEnd margin-lr-10">
+        <div class="ice-row margin-bottom-s">
           <u-button class="btnWidth" text="退出登陆" @click="logOut"></u-button>
+        </div>
+        <div class="ice-row margin-bottom-s">
+          <u-button class="btnWidth" text="成为admin" @click="beAdmin"></u-button>
+        </div>
+        <div class="ice-row margin-bottom-s">
+          <u-button class="btnWidth" text="绑定账户" @click="bindWebAccount"></u-button>
         </div>
       </div>
     </view>

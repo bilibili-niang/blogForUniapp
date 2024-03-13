@@ -66,6 +66,14 @@
         "enablePullDownRefresh": true,
         "onReachBottomDistance": 200
       }
+    },
+    {
+      "path": "pages/bindWebAccount/index",
+      "style": {
+        "navigationBarTitleText": "绑定我的pc端账户",
+        "enablePullDownRefresh": true,
+        "onReachBottomDistance": 200
+      }
     }
   ],
   "globalStyle": {

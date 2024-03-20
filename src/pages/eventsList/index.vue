@@ -19,10 +19,10 @@
           <div class="ice-row">
             <u-tag :text="item.tag1" size="mini" :bgColor="borderColor" :borderColor="borderColor"
                    v-if="item.tag1!==''"></u-tag>
-            <div class="blockVertical">2</div>
+            <div class="blockVertical"></div>
             <u-tag :text="item.tag2" size="mini" :bgColor="borderColor" :borderColor="borderColor"
                    v-if="item.tag2!==''"></u-tag>
-            <div class="blockVertical">3</div>
+            <div class="blockVertical"></div>
             <u-tag :text="item.tag3" size="mini" :bgColor="borderColor" :borderColor="borderColor"
                    v-if="item.tag3.length>0"></u-tag>
           </div>

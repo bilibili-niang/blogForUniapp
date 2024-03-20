@@ -22,11 +22,13 @@ const model1 = ref({
  */
 const form1 = ref();
 const submit = () => {
-  form1.value.validate().then(res => {
-    console.log(res);
-  }).catch(errors => {
-    console.log(errors);
-  });
+  form1.value.validate()
+      .then(res => {
+        console.log(res);
+      })
+      .catch(errors => {
+        console.log(errors);
+      });
 };
 const rules = ref({
   account: [

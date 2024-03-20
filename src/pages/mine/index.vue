@@ -57,6 +57,7 @@ const login = () => {
         uni.setStorageSync('token', res.result.token)
         // 写入pinia
         memberStore.setProfile(res.result)
+        uni.showTabBar()
         uni.showToast({
           title: '登录成功',
           icon: 'success'
@@ -146,6 +147,8 @@ const loginByToken = async () => {
           memberStore.setProfile(data.result.res)
         }
 
+        // 显示
+        uni.showTabBar()
       }
     });
   } catch (e) {

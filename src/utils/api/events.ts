@@ -17,6 +17,12 @@ export default {
             method: 'POST'
         })
     },
+    async getAddressByIp(){
+        return http<String[]>({
+            url: 'https://restapi.amap.com/v3/ip?key=e3fbe77aa48a4ea73223d01f83c83a1b',
+            method: 'GET'
+        })
+    }
 
 
 }

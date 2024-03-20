@@ -134,14 +134,9 @@ const init = () => {
 // 获取今日天气
 const weather = ref();
 const getWeather = async () => {
-  const res = await uniCloud.callFunction({
-    name: 'getWeather',
-    data: {
-      city: '北京'
-    }
-  })
-  weather.value = res.result.data.weather
-  console.log(weather.value)
+  const res = await api.getAddressByIp()
+  console.log(res)
+
 }
 getWeather();
 init()

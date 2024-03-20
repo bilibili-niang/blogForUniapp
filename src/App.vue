@@ -1,6 +1,9 @@
 <script setup lang="ts">
-import {onHide, onLaunch, onShow} from "@dcloudio/uni-app";
+import {onLaunch} from "@dcloudio/uni-app";
 import api from "@/utils/api";
+import {useMemberStore} from "@/stores";
+
+const memberStore = useMemberStore();
 
 const loginByToken = async () => {
   console.log("onLaunch")
@@ -15,16 +18,17 @@ const loginByToken = async () => {
     });
     if (tokenStr) {
       // 假设这里有一个函数getUserInfoByToken用于通过token获取用户信息
-      const userInfo = await api.getUserInfoByToken(tokenStr);
-      console.log("userInfo:")
-      console.log(userInfo);
+      const data = await api.getUserInfoByToken(tokenStr);
+      // 写入pinia
+      memberStore.setProfile(data.result.res)
+      uni.showTabBar()
+    } else {
+      // 隐藏
+      uni.hideTabBar()
     }
-
   } catch (e) {
-    console.log(e)
   }
 }
-
 onLaunch(() => {
   // 强制竖屏
   //#ifdef APP-PLUS
@@ -32,12 +36,7 @@ onLaunch(() => {
   //#endif
   loginByToken();
 });
-onShow(() => {
 
-});
-onHide(() => {
-
-});
 </script>
 <style lang="less">
 #app{

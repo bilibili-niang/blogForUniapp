@@ -110,10 +110,10 @@ const avatarClick = () => {
       <div class="ice-row margin-top-s margin-lr-10">
         <up-image :show-loading="true" :src="imgUrl" width="80px" height="80px"
                   @click="avatarClick" shape="circle"></up-image>
-        <div class="ice-column">
+        <div class="ice-column wflex">
           <div class="ice-text margin-t-b-s">
             <up-text text="吾名" bold></up-text>
-            <up-text :lines="1" :text="data.username"></up-text>
+            <up-text class="wflex" :lines="1" :text="data.username"></up-text>
           </div>
           <div class="ice-text margin-t-b-s">
             <up-text text="最终召唤" bold></up-text>

@@ -48,5 +48,12 @@ export default {
     // 获取用户的统计
     async getUserStatistics() {
 
+    },
+    async updateUserInfo(params: {}) {
+        return http({
+            url: '/api/user/updateUserInf',
+            data: params,
+            method: 'POST'
+        })
     }
 }

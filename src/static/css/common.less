@@ -1,87 +1,98 @@
-.padding-lr-10{
+.padding-lr-10 {
   padding-left: 10rpx;
   padding-right: 10rpx;
 }
 
-.padding-lr-20{
+.padding-lr-20 {
   padding-left: 20rpx;
   padding-right: 20rpx;
 }
 
 // margin left right
-.margin-lr-10{
+.margin-lr-10 {
   margin-left: 10rpx;
   margin-right: 10rpx;
 }
 
-.margin-lr-20{
+.margin-lr-20 {
   margin-left: 20rpx;
   margin-right: 20rpx;
 }
 
-.margin-lr-30{
+.margin-lr-30 {
   margin-left: 30rpx;
   margin-right: 30rpx;
 }
-.margin-top-s{
+
+.margin-top-s {
   margin-top: 10rpx;
 }
-.margin-top-m{
+
+.margin-top-m {
   margin-top: 20rpx;
 }
-.margin-top-l{
+
+.margin-top-l {
   margin-top: 30rpx;
 }
-.margin-bottom-s{
+
+.margin-bottom-s {
   margin-bottom: 10rpx;
 }
 
-.margin-bottom-m{
+.margin-bottom-m {
   margin-bottom: 20rpx;
 }
-.margin-bottom-l{
+
+.margin-bottom-l {
   margin-bottom: 30rpx;
 }
-.margin-t-b-s{
+
+.margin-t-b-s {
   margin-top: 10rpx;
   margin-bottom: 10rpx;
 }
-.margin-t-b-m{
+
+.margin-t-b-m {
   margin-top: 20rpx;
   margin-bottom: 20rpx;
 }
-.margin-t-b-l{
+
+.margin-t-b-l {
   margin-top: 30rpx;
   margin-bottom: 30rpx;
 }
-.padding-top-s{
+
+.padding-top-s {
   padding-top: 10rpx;
 }
-.padding-top-m{
+
+.padding-top-m {
   padding-top: 20rpx;
 }
-.padding-top-l{
+
+.padding-top-l {
   padding-top: 30rpx;
 }
 
 // 容器
-.container{
+.container {
   .padding-lr-20();
 }
 
-.flex-row(@direction: row){
+.flex-row(@direction: row) {
   display: flex;
   flex-direction: @direction;
 }
 
 // pop
-/deep/ .popupLim{
+/deep/ .popupLim {
   .flex-row(column);
   .padding-lr-20();
   background: @bacColor;
 }
 
-.icon{
+.icon {
   font-size: @font-s;
   font-weight: bold;
   background: @themeColor-heightLight;
@@ -96,7 +107,7 @@
   margin-bottom: @margin-m;
 }
 
-.title{
+.title {
   font-size: @font-m;
   font-weight: normal;
   border-bottom-color: @themeActiveColor 1px solid !important;
@@ -104,23 +115,23 @@
   margin-bottom: @margin-m;
 }
 
-.time{
+.time {
   font-size: @font-m;
   color: @fontColor;
   margin-bottom: @margin-m;
 }
 
-.des{
+.des {
   font-size: @font-m;
   color: @fontColor;
 }
 
-.bigTitle{
+.bigTitle {
   font-size: @font-l;
   font-weight: bold;
 }
 
-/deep/ button{
+/deep/ button {
   border-radius: @radio-l;
   color: @fontColor;
   background: @bacColor;
@@ -128,15 +139,15 @@
 }
 
 //tag的边框颜色
-/deep/ .uni-tag{
+/deep/ .uni-tag {
   border-color: @borderColor;
 }
 
-.red{
+.red {
   color: #dd524d;
 }
 
-.mainBtn{
+.mainBtn {
   z-index: 10;
   color: @fontColor;
   border: @themeActiveColor 1px solid;
@@ -146,12 +157,12 @@
   margin-bottom: @margin-s;
 }
 
-.widthFit{
+.widthFit {
   width: fit-content !important;
   padding: 10rpx;
 }
 
-.ice-tag{
+.ice-tag {
   background: @bacColor-bleak;
   color: @fontColor;
   font-size: @font-s;
@@ -161,100 +172,126 @@
   white-space: nowrap;
 }
 
-.justC{
+.justC {
   justify-content: center;
 }
-.justB{
+
+.justB {
   justify-content: space-between;
 }
-.justStart{
+
+.justStart {
   justify-content: flex-start;
 }
-.alignEnd{
+
+.alignEnd {
   align-items: flex-end;
 }
 
-.ice-title{
+.ice-title {
   font-size: @font-m;
   color: @fontColor;
 
 }
 
-.markdown{
-  img{
+.markdown {
+  img {
     max-width: 90vw;
   }
 }
 
-.column{
+.column {
   display: flex;
   flex-direction: column;
 }
 
-.row{
+.row {
   display: flex;
   flex-direction: row;
 }
 
-.columnBlock{
+.columnBlock {
   display: flex;
   height: .3rem;
   width: 100%;
 }
 
-.blockLine{
+.blockLine {
   .row();
   width: 100%;
   height: 1rem;
 }
-.blockVertical{
+
+.blockVertical {
   .column();
   height: 100%;
   width: .3rem;
 }
-.header{
+
+.header {
   font-weight: bolder;
 }
-.ice-column{
+
+.ice-column {
   .column();
 }
-.ice-row{
+
+.ice-row {
   .row();
 }
-.ice-row-reverse{
+
+.ice-row-reverse {
   display: flex;
   flex-direction: row-reverse;
 }
-.ice-text{
+
+.ice-text {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
-.alignC{
+
+.alignC {
   align-items: center;
 }
-.w-100{
+
+.w-100 {
   width: 100%;
 }
-.w-70{
+
+.w-70 {
   width: 70%;
 }
-.w-30{
+
+.w-30 {
   width: 30%;
 }
-.alignS{
+
+.alignS {
   align-items: flex-start;
 }
-.hAuto{
+
+.hAuto {
   height: auto !important;
 }
-hr{
+
+hr {
   border-bottom: @borderColor 1px solid;
 }
-.bottom-themeColor{
+
+.bottom-themeColor {
   border-bottom: 1px @themeColor solid;
   padding-bottom: 10rpx;
 }
-.u-button{
+
+.u-button {
   width: auto !important;
+}
+
+.w100percent {
+  width: 100%;
+}
+
+.wflex {
+  flex: 1;
 }

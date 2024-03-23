@@ -7,6 +7,11 @@
     <div class="ice-column" v-else>
       您已登陆
     </div>
+    <div class="ice-column" v-if="userInfo">
+      <!--统计概览-->
+
+
+    </div>
 
   </div>
 

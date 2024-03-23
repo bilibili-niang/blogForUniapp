@@ -85,6 +85,15 @@ const bindWebAccount = () => {
 
 }
 
+/**
+ * 跳转页面,修改个人信息
+ */
+const changeUserInfo = () => {
+  uni.navigateTo({
+    url: '/pages/mine/changeUserInfo/index'
+  })
+}
+
 // 查看头像
 const avatarClick = () => {
   uni.previewImage({
@@ -102,13 +111,18 @@ const avatarClick = () => {
         <up-image :show-loading="true" :src="imgUrl" width="80px" height="80px"
                   @click="avatarClick" shape="circle"></up-image>
         <div class="ice-column">
-          <div class="ice-text">
-            <div class="ice-tag">昵称:</div>
-            {{ data.username }}
+          <div class="ice-text margin-t-b-s">
+            <up-text text="吾名" bold></up-text>
+            <up-text :lines="1" :text="data.username"></up-text>
           </div>
-          <div class="ice-text">
-            <div class="ice-tag">职业:</div>
+          <div class="ice-text margin-t-b-s">
+            <up-text text="最终召唤" bold></up-text>
             {{ data.occupation }}
+          </div>
+
+          <div class="ice-text margin-t-b-s">
+            <up-text text="自我介绍" bold></up-text>
+            {{ data.word || '暂无' }}
           </div>
         </div>
       </div>
@@ -127,12 +141,17 @@ const avatarClick = () => {
         <div class="ice-row margin-bottom-s">
           <u-button class="btnWidth" text="退出登陆" @click="logOut"></u-button>
         </div>
+        <!-- <div class="ice-row margin-bottom-s">
+                  <u-button class="btnWidth" text="成为admin" @click="beAdmin"></u-button>
+                </div>
+                <div class="ice-row margin-bottom-s">
+                  <u-button class="btnWidth" text="绑定账户" @click="bindWebAccount"></u-button>
+                </div>-->
+
         <div class="ice-row margin-bottom-s">
-          <u-button class="btnWidth" text="成为admin" @click="beAdmin"></u-button>
+          <u-button class="btnWidth" text="修改信息" @click="changeUserInfo"></u-button>
         </div>
-        <div class="ice-row margin-bottom-s">
-          <u-button class="btnWidth" text="绑定账户" @click="bindWebAccount"></u-button>
-        </div>
+
       </div>
     </view>
   </u-popup>

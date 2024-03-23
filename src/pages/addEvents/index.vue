@@ -23,17 +23,13 @@
                          placeholder="请输入内容"></uni-easyinput>
         </view>
       </view>
-      <!--<view class="formItem">
-              <view class="title header">
-                name
-              </view>
-              <view class="time">
-                <uni-easyinput v-model="events.name" :clearable="false" placeholder="请输入内容"></uni-easyinput>
-              </view>
-            </view>-->
       <view class="formItem">
         <div class="ice-tag">description</div>
-        <view class="time">
+        <div class="mainBtn" @click="showFlag">
+          {{ showDescription ? 'show' : 'add' }}
+        </div>
+
+        <view class="time" v-show="showDescription">
           <uni-easyinput type="textarea" :clearable="false" v-model="events.description"
                          placeholder="请输入内容"></uni-easyinput>
         </view>
@@ -64,7 +60,12 @@
 
       <div class="ice-column">
         <div class="ice-tag">tomorrow</div>
-        <view class="time">
+
+        <div class="mainBtn" @click="showFlagshowTomorrow">
+          {{ showTomorrow ? 'show' : 'add' }}
+        </div>
+
+        <view class="time" v-show="showTomorrow">
           <uni-easyinput v-model="events.tomorrow" :clearable="false" placeholder="请输入内容"></uni-easyinput>
         </view>
       </div>
@@ -137,6 +138,16 @@ const getWeather = async () => {
   const res = await api.getAddressByIp()
   console.log(res)
 
+}
+
+// 是否展示 description
+const showDescription = ref(false)
+const showFlag = () => {
+  showDescription.value = !showDescription.value
+}
+const showTomorrow = ref(false)
+const showFlagshowTomorrow = () => {
+  showTomorrow.value = !showTomorrow.value
 }
 getWeather();
 init()

@@ -44,5 +44,9 @@ export default {
             url: '/api/user/becomeAdmin',
             method: 'POST'
         })
+    },
+    // 获取用户的统计
+    async getUserStatistics() {
+
     }
 }

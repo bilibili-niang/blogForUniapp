@@ -74,6 +74,14 @@
         "enablePullDownRefresh": true,
         "onReachBottomDistance": 200
       }
+    },
+    {
+      "path": "pages/mine/changeUserInfo/index",
+      "style": {
+        "navigationBarTitleText": "修改信息",
+        "enablePullDownRefresh": true,
+        "onReachBottomDistance": 200
+      }
     }
   ],
   "globalStyle": {

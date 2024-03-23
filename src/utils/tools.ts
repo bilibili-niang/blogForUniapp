@@ -19,3 +19,24 @@ export const findColor = function (pinyin: any): any {
     return obj || false;
 };
 export const borderColor = "#ccccd6";
+
+/**
+ * 深克隆
+ */
+export const deepClone = function (obj: any): any {
+    if (obj instanceof Array) {
+        let result = [];
+        for (let i = 0; i < obj.length; i++) {
+            result.push(deepClone(obj[i]));
+        }
+        return result;
+    } else if (obj instanceof Object) {
+        let result = {};
+        for (let key in obj) {
+            result[key] = deepClone(obj[key]);
+        }
+        return result;
+    } else {
+        return obj;
+    }
+};

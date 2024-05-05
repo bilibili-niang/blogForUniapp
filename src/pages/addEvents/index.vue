@@ -71,19 +71,21 @@
       </div>
 
       <view class="btns">
-        <up-button text="提交" @click="post" :disable="allowClick"></up-button>
+        <CustomButton :disable="allowClick" @click="post">提交</CustomButton>
+        <CustomButton disable>测试</CustomButton>
       </view>
     </view>
   </view>
 </template>
 
 <script setup lang="ts">
-import {reactive, ref} from "vue";
-import dayjs from "dayjs";
-import api from "@/utils/api";
-import CustomNavBar from "@/pages/index/components/customNavBar.vue";
+import { reactive, ref } from 'vue'
+import dayjs from 'dayjs'
+import api from '@/utils/api'
+import './index.less'
+import CustomButton from '@/components/common/customButton/index.vue'
 
-const now = dayjs();
+const now = dayjs()
 // 当前模式 view为浏览
 let flag = ref('add')
 
@@ -91,24 +93,25 @@ const time = ref('')
 const content = ref('')
 
 const events = reactive({
-  op: "add",
-  name: "",
-  description: "",
-  content: "",
-  tag1: "",
-  tag2: "",
-  tag3: "",
-  tomorrow: ""
+  op: 'add',
+  name: '',
+  description: '',
+  content: '',
+  tag1: '',
+  tag2: '',
+  tag3: '',
+  tomorrow: ''
 })
 
-const allowClick = ref(false);
+const allowClick = ref(false)
 
 const post = async () => {
-  allowClick.value = !allowClick.value;
-  console.log('post!')
+  console.log('post')
+  if (!allowClick.value) return void 0
+  allowClick.value = !allowClick.value
   const res = await api.postEvents({
     ...events,
-    token: uni.getStorageSync('token') || ""
+    token: uni.getStorageSync('token') || ''
   })
   if (res.success) {
     // 弹窗,创建成功
@@ -126,14 +129,14 @@ const post = async () => {
 
 
 const init = () => {
-  const year = now.year();
-  const month = now.month() + 1; // 月份是从 0 开始的，所以需要加 1
-  const date = now.date();
+  const year = now.year()
+  const month = now.month() + 1 // 月份是从 0 开始的，所以需要加 1
+  const date = now.date()
   time.value = `${year}-${month}-${date}`
 }
 
 // 获取今日天气
-const weather = ref();
+const weather = ref()
 const getWeather = async () => {
   const res = await api.getAddressByIp()
   console.log(res)
@@ -149,14 +152,7 @@ const showTomorrow = ref(false)
 const showFlagshowTomorrow = () => {
   showTomorrow.value = !showTomorrow.value
 }
-getWeather();
+getWeather()
 init()
 </script>
 
-<style scoped lang="less">
-.addEvents{
-  .padding-lr-20();
-  padding-bottom: 20vh;
-
-}
-</style>

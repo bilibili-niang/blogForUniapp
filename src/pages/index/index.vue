@@ -5,12 +5,11 @@
       <u-button text="登陆页" @click="goLogin"></u-button>
     </div>
     <div class="ice-column" v-else>
-      您已登陆
-    </div>
-    <div class="ice-column" v-if="userInfo">
-      <!--统计概览-->
+      <div class="ice-column" v-if="userInfo">
+        统计概览
+statistics
 
-
+      </div>
     </div>
 
   </div>
@@ -18,13 +17,13 @@
 </template>
 
 <script setup lang="ts">
-import {useMemberStore} from "@/stores";
-import {ref} from 'vue';
+import { useMemberStore } from '@/stores'
+import { ref } from 'vue'
 
-const memberStore = useMemberStore();
+const memberStore = useMemberStore()
 const userInfo = ref(memberStore.$state.profile || '')
 if (memberStore.$state.profile) {
-  uni.showTabBar();
+  uni.showTabBar()
 }
 const goLogin = () => {
   uni.switchTab({
@@ -34,16 +33,19 @@ const goLogin = () => {
 </script>
 
 <style scoped lang="less">
-.indexPage{
+.indexPage {
 }
-.list{
+
+.list {
   display: grid;
   grid-template-columns: 160px 160px;
 }
-.item-left{
+
+.item-left {
   width: 180px;
 }
-.item-date-time{
+
+.item-date-time {
   display: flex;
   justify-content: flex-end;
 }

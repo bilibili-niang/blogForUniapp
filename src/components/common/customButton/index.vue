@@ -4,7 +4,7 @@ import { computed, defineComponent } from 'vue'
 export default defineComponent({
   name: 'CustomButton',
   props: {
-    disable: {
+    disabled: { // 更改为disabled以遵循Vue的约定
       type: Boolean,
       default: false
     },
@@ -13,20 +13,27 @@ export default defineComponent({
       default: '#ffffff'
     }
   },
-  setup(props) {
+  emits: ['click'], // 声明会发出的自定义事件
+  setup(props, { emit }) {
     const buttonStyle = computed(() => {
       return {
         color: props.color
       }
     })
 
-    return { buttonStyle, props }
+    const handleClick = () => {
+      if (!props.disabled) {
+        emit('click') // 触发click事件
+      }
+    }
+
+    return { buttonStyle, handleClick }
   }
 })
 </script>
 
 <template>
-  <div :class="['customButton', props.disable ? 'disable' : '']" :style="buttonStyle">
+  <div :class="['customButton', { disable: disabled }]" :style="buttonStyle" @click="handleClick">
     <slot></slot>
   </div>
 </template>
@@ -39,8 +46,8 @@ export default defineComponent({
   flex-wrap: nowrap;
   padding: @padding-s @padding-m;
   border-radius: @radio-m;
-  background: @button-bac; /* 确保@button-bac在你的less变量中已定义 */
-  color: inherit; /* 或具体颜色值，如果希望通过计算属性设置则无需这行 */
+  background: @themeActiveColor;
+  color: inherit;
   margin: @margin-s;
 }
 

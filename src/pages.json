@@ -117,12 +117,12 @@
         "iconPath": "static/icon/today.png",
         "selectedIconPath": "static/icon/todayActive.png"
       },
-      {
+      /*{
         "pagePath": "pages/eventsList/index",
         "text": "昨天",
         "iconPath": "static/icon/eventsList.png",
         "selectedIconPath": "static/icon/eventsListActive.png"
-      },
+      },*/
       {
         "pagePath": "pages/mine/index",
         "text": "我的",

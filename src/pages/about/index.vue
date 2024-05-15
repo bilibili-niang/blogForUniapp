@@ -10,7 +10,7 @@
     <view class="context">
       <view v-if="data">
         <view class="itemLim" v-for="(item,index) in data" :key="index">
-          <item :item="item"></item>
+          <Item :item="item"></Item>
         </view>
       </view>
     </view>
@@ -23,7 +23,7 @@
 import {onLoad, onPullDownRefresh} from "@dcloudio/uni-app";
 import {nextTick, ref} from "vue";
 import api from "@/utils/api";
-import Item from "@/pages/about/components/item.vue";
+import Item from "@/pages/about/components/Item/index.vue";
 
 
 let tag = ref('')

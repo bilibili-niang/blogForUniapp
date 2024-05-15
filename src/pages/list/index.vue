@@ -1,9 +1,8 @@
 <template>
-
-  <view class="list">
+  <view class="list padding-top-l">
     <view class="content" v-if="list">
       <view class="listLim" v-for="(item,index) in list" :key="index">
-        <item :item="item"></item>
+        <Item :item="item"></Item>
       </view>
     </view>
   </view>
@@ -11,10 +10,10 @@
 
 <script setup lang="ts">
 
-import {ref} from "vue";
-import api from "@/utils/api";
-import {onPullDownRefresh, onReachBottom} from "@dcloudio/uni-app";
-import Item from "@/pages/about/components/item.vue";
+import { ref } from 'vue'
+import api from '@/utils/api'
+import { onPullDownRefresh, onReachBottom } from '@dcloudio/uni-app'
+import Item from '@/pages/about/components/Item/index.vue'
 
 const list = ref()
 
@@ -35,9 +34,9 @@ const init = async () => {
   })
   if (res.success) {
     if (pageNum.value !== 1) {
-      list.value = list.value.concat(res.result)
+      list.value = list.value.concat(res.result.rows)
     } else {
-      list.value = res.result
+      list.value = res.result.rows
     }
   } else {
     list.value = false
@@ -62,10 +61,7 @@ init()
 </script>
 
 <style scoped lang="less">
-.list{
-  background: @borderColor;
+.list {
   .padding-lr-10();
-}
-.waitBlock{
 }
 </style>

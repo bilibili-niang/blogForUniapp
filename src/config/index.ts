@@ -1,0 +1,1 @@
+export const activeColor='rgba(84, 30, 36, 1)'

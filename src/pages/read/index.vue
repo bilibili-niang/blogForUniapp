@@ -1,60 +1,66 @@
 <template>
-  <view class="read">
-    <div class="ice-column userCard">
-      <up-text :lines="1" :text="data.title" bold size="17" class="margin-bottom-s"></up-text>
-      <up-text :text="getTimeByStr(data.updatedAt)||'-'" size="16"></up-text>
-      <div class="ice-row justStart alignEnd">
-        <up-image :show-loading="true" :src="imgUrl" width="80px" height="80px" shape="circle"></up-image>
-        <div class="ice-row">
-          <up-text text="作者:"></up-text>
-          <up-text :text="userData.value.username"></up-text>
+  <view class="read ice-column">
+    <div class="readDataContainer ice-column">
+      <div class="row w-percent100">
+        <up-text :text="data.name"></up-text>
+      </div>
+      <div class="row  margin-top-m">
+        <up-tag text="description" size="mini" plain :borderColor="activeColor" :color="activeColor"></up-tag>
+      </div>
+
+      <div class="row">
+        <up-text :text="data.description"></up-text>
+      </div>
+      <div class="row margin-top-m">
+        <up-tag text="content" size="mini" plain :borderColor="activeColor" :color="activeColor"></up-tag>
+      </div>
+      <div class="row">
+        <up-text :text="data.content"></up-text>
+      </div>
+
+      <div class="row margin-top-m">
+        <up-tag text="tags" size="mini" plain :borderColor="activeColor" :color="activeColor"></up-tag>
+      </div>
+      <div class="row margin-top-s">
+        <div class="margin-lr-10">
+          <up-tag :text="data.tag1" plain :borderColor="activeColor" :color="activeColor" v-if="data.tag1"></up-tag>
+        </div>
+        <div class="margin-lr-10">
+          <up-tag :text="data.tag2" plain :borderColor="activeColor" :color="activeColor" v-if="data.tag2"></up-tag>
+        </div>
+        <div class="margin-lr-10">
+          <up-tag :text="data.tag3" plain :borderColor="activeColor" :color="activeColor" v-if="data.tag3"></up-tag>
         </div>
       </div>
     </div>
-
-    <div class="operate ice-row justStart margin-bottom-l">
-      <u-button text="点赞" icon="thumb-up" @click="praise"></u-button>
+    <div class="readDataContainer margin-top-m">
+      <Activity/>
     </div>
 
-    <view class="content markdown" v-html="content">
-
-    </view>
-    <view class="tags">
-
-    </view>
   </view>
 </template>
 
 <script setup lang="ts">
-import {computed, nextTick, reactive, ref} from "vue";
-import {onLoad, onPullDownRefresh} from "@dcloudio/uni-app";
-import api, {baseUrl} from "@/utils/api";
-import {getTimeByStr} from '@/utils/tools'
+import { nextTick, ref } from 'vue'
+import { onLoad, onPullDownRefresh } from '@dcloudio/uni-app'
+import api from '@/utils/api'
+import { activeColor } from '@/config'
+import Activity from './components/Activity/index.vue'
 
 const data = ref()
 const id = ref()
-
-// markdown的html内容
-let content = ref('')
-
-const userData = reactive({})
 
 const init = async () => {
   onLoad((opt: any) => {
     id.value = opt.value
     uni.setStorageSync('readId', opt.value)
   })
-  id.value = uni.getStorageSync("readId")
+  id.value = uni.getStorageSync('readId')
   // 这里tag只有一个
   // 通过id请求详情
-  const res = await api.getMarkdownById({id: id.value})
+  const res = await api.getEventDetail({ id: id.value })
   data.value = res.result
-  userData.value = res.userInf
-  const contentTemp = await api.getMarkdownContent({id: id.value})
-  if (contentTemp.success) {
-    content.value = contentTemp.result + ''
-  }
-  uni.stopPullDownRefresh();
+  uni.stopPullDownRefresh()
 }
 
 // 下拉触发刷新
@@ -66,33 +72,19 @@ nextTick(() => {
   init()
 })
 
-
-const imgUrl = computed(() => {
-  return baseUrl + userData.value.avatar;
-})
-// 点赞
-const praise = () => {
-
-}
-
 </script>
 
 <style scoped lang="less">
-.read{
-  background: @borderColor;
-  min-height: 100vh;
-  .padding-top-l();
+.read {
+  border-radius: @radio-ls;
+  min-height: 50vh;
+  padding: @padding-m;
+
+  .readDataContainer {
+    border-radius: @radio-ls;
+    border: 1px solid @themeActiveColor;
+    padding: @padding-s;
+  }
 }
-.content, .userCard{
-  background: white;
-  border-radius: @radio-m;
-  margin-bottom: @margin-m;
-  .margin-lr-10();
-  box-sizing: border-box;
-  font-size: 30rpx;
-  font-family: "PingFang SC";
-}
-.userCard{
-  padding: @padding-l;
-}
+
 </style>

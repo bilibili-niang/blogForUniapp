@@ -1,6 +1,6 @@
 <template>
   <view class="itemCon">
-    <div :class="['ice-column','itemContaier',!childrenItem.name&&'errorItem']" @click="alertOption">
+    <div :class="['ice-column','itemContainer',!childrenItem.name&&'errorItem']" @click="alertOption">
       <div class="ice-row margin-lr-10 margin-top-s">
         <up-text :lines="1" :text="childrenItem.name" size="16"></up-text>
       </div>
@@ -37,7 +37,7 @@
       <text>Popup</text>
       确定删除吗？
       <div class="row">
-        <CustomButton @click="close">确定</CustomButton>
+        <CustomButton @click="confirmDelete">确定</CustomButton>
         <CustomButton @click="close">关闭</CustomButton>
       </div>
     </div>
@@ -51,6 +51,7 @@ import { ref } from 'vue'
 import { getTimeByStr } from '@/utils/tools'
 import CustomButton from '@/components/common/customButton/index.vue'
 import { activeColor } from '@/config'
+import api from '@/utils/api'
 
 const props = defineProps({
   item: {
@@ -92,6 +93,25 @@ const close = () => {
   popupRef.value?.close()
 }
 
+const emits=defineEmits(['refresh'])
+// 删除
+const confirmDelete = async () => {
+  await api.deleteEvent(props.item.id)
+      .then(res => {
+        console.log('res:')
+        console.log(res)
+        if (res.success) {
+          // 提示
+          uni.showToast({
+            title: '删除成功',
+            icon: 'none'
+          })
+          emits('refresh')
+          popupRef.value?.close()
+        }
+      })
+}
+
 function init() {
   childrenItem.value = props.item
 }
@@ -104,10 +124,11 @@ init()
   border-radius: @radio-ls;
   margin-bottom: @margin-l;
   background: white;
-  box-shadow: 0 6px 12px @themeActiveColor;
+  //box-shadow: 0 6px 12px @themeActiveColor;
   overflow: hidden;
+  border-bottom: 1px dashed @themeActiveColor;
 
-  .itemContaier {
+  .itemContainer {
     border-radius: @radio-ls;
   }
 

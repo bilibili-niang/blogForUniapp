@@ -20,20 +20,20 @@ const loginByToken = async () => {
       uni.hideTabBar()
       return void 0
     }
-    // 假设这里有一个函数getUserInfoByToken用于通过token获取用户信息
     const data = await api.getUserInfoByToken(tokenStr)
-    // 写入pinia
     memberStore.setProfile(data.result.res)
     uni.showTabBar()
   } catch (e) {
   }
 }
+
 onLaunch(() => {
   // 强制竖屏
   //#ifdef APP-PLUS
-  plus.screen.lockOrientation('portrait-primary') // 强制竖屏
+  // 强制竖屏
+  plus.screen.lockOrientation('portrait-primary')
   //#endif
-  loginByToken()
+  // loginByToken()
 })
 
 </script>

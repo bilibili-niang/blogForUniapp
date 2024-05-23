@@ -7,7 +7,7 @@ export default defineComponent({
 </script>
 
 <script setup>
-import {computed, defineProps} from "vue";
+import {computed} from "vue";
 import {baseUrl} from "@/utils/api";
 
 const props = defineProps({

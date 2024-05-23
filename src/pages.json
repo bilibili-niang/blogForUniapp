@@ -10,10 +10,17 @@
     }
   },
   "pages": [
-   /* {
+    {
       "path": "pages/mainContainer/index",
       "style": {
-        "navigationBarTitleText": "容器",
+        "navigationBarTitleText": "首页",
+        "enablePullDownRefresh": true
+      }
+    },
+    /*{
+      "path": "pages/read/editor/index",
+      "style": {
+        "navigationBarTitleText": "编辑",
         "enablePullDownRefresh": true
       }
     },*/
@@ -98,44 +105,5 @@
     "backgroundTextStyle": "dark",
     "color": "#ffffff",
     "backgroundColor": "#F8F8F8"
-  },
-  "tabBar": {
-    // "backgroundColor": "#dcdadd",
-    "color": "#333333",
-    // "selectedColor": "#441a1e",
-    "selectedColor": "#541e24",
-    "borderStyle": "black",
-    "list": [
-      {
-        "pagePath": "pages/index/index",
-        "text": "首页",
-        "iconPath": "static/icon/index.png",
-        "selectedIconPath": "static/icon/indexActive.png"
-      },
-      {
-        "pagePath": "pages/list/index",
-        "text": "列表",
-        "iconPath": "static/icon/list.png",
-        "selectedIconPath": "static/icon/listActive.png"
-      },
-      {
-        "pagePath": "pages/addEvents/index",
-        "text": "今日",
-        "iconPath": "static/icon/today.png",
-        "selectedIconPath": "static/icon/todayActive.png"
-      },
-      /*{
-        "pagePath": "pages/eventsList/index",
-        "text": "昨天",
-        "iconPath": "static/icon/eventsList.png",
-        "selectedIconPath": "static/icon/eventsListActive.png"
-      },*/
-      {
-        "pagePath": "pages/mine/index",
-        "text": "我的",
-        "iconPath": "static/icon/mine.png",
-        "selectedIconPath": "static/icon/mineActive.png"
-      }
-    ]
   }
 }

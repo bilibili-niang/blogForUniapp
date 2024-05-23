@@ -3,7 +3,7 @@ import App from './App.vue'
 // 导入less
 import pinia from './stores'
 import tabBar from '@/components/common/tabBar/index.vue'
-import iceText from '@/components/common/text/iceText.vue'
+import iceText from '@/components/common/iceText/index.vue'
 import 'uview-plus/index.scss'
 
 // @ts-ignore

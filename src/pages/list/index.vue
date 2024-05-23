@@ -2,7 +2,7 @@
   <view class="list padding-top-l">
     <view class="content" v-if="list">
       <view class="listLim" v-for="(item,index) in list" :key="index">
-        <Item :item="item"></Item>
+        <Item :item="item" @refresh="init"></Item>
       </view>
     </view>
   </view>
@@ -25,14 +25,15 @@ const pageSize = ref(20)
 const init = async () => {
   // 加载弹窗
   uni.showToast({
-    icon: 'loading',
-    title: 'loading...'
+    title: 'loading...',
+    icon: 'none'
   })
   const res = await api.home({
     pageNum: pageNum.value,
     pageSize: pageSize.value
   })
   if (res.success) {
+    uni.stopPullDownRefresh()
     if (pageNum.value !== 1) {
       list.value = list.value.concat(res.result.rows)
     } else {
@@ -45,7 +46,6 @@ const init = async () => {
 
 // 触底
 onReachBottom(() => {
-  console.log('触底')
   // pageNum++
   pageNum.value++
   init()

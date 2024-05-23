@@ -3,6 +3,7 @@
     <div class="readDataContainer ice-column">
       <div class="row w-percent100">
         <up-text :text="data.name"></up-text>
+        <CustomButton @click="goEditor(data.id)" v-if="false">编辑</CustomButton>
       </div>
       <div class="row  margin-top-m">
         <up-tag text="description" size="mini" plain :borderColor="activeColor" :color="activeColor"></up-tag>
@@ -46,6 +47,7 @@ import { onLoad, onPullDownRefresh } from '@dcloudio/uni-app'
 import api from '@/utils/api'
 import { activeColor } from '@/config'
 import Activity from './components/Activity/index.vue'
+import CustomButton from '@/components/common/customButton/index.vue'
 
 const data = ref()
 const id = ref()
@@ -71,6 +73,11 @@ onPullDownRefresh(() => {
 nextTick(() => {
   init()
 })
+
+// 前往编辑
+const goEditor = (id: string) => {
+
+}
 
 </script>
 

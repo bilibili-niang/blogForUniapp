@@ -21,7 +21,6 @@
         <view class="time">
           <uni-easyinput v-model="events.name" :clearable="false"
                          placeholder="加个标题吧">
-
           </uni-easyinput>
         </view>
         <view class="time margin-top-m">
@@ -81,11 +80,11 @@
     <div class="readDataContainer margin-top-m ice-column" v-if="flag==='view'">
       <div class="row w-percent100">
         <up-text :text="data.name"></up-text>
+        <CustomButton @click="changeMode">编辑</CustomButton>
       </div>
       <div class="row  margin-top-m">
         <up-tag text="description" size="mini" plain :borderColor="activeColor" :color="activeColor"></up-tag>
       </div>
-
       <div class="row">
         <up-text :text="data.description"></up-text>
       </div>
@@ -95,7 +94,6 @@
       <div class="row">
         <up-text :text="data.content"></up-text>
       </div>
-
       <div class="row margin-top-m">
         <up-tag text="tags" size="mini" plain :borderColor="activeColor" :color="activeColor"></up-tag>
       </div>
@@ -115,7 +113,7 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
+import { ref } from 'vue'
 import dayjs from 'dayjs'
 import api from '@/utils/api'
 import './index.less'
@@ -128,7 +126,7 @@ const flag = ref('add')
 const data = ref({})
 const time = ref('')
 
-const events = reactive({
+const events = ref<any>({
   op: 'add',
   name: '',
   description: '',
@@ -142,7 +140,7 @@ const events = reactive({
 const allowClick = ref(false)
 
 const post = async () => {
-  if (allowClick.value || !events.name) {
+  if (!events.value.name) {
     uni.showToast({
       title: '需要先填写内容',
       icon: 'none'
@@ -151,7 +149,7 @@ const post = async () => {
   }
   allowClick.value = !allowClick.value
   const res = await api.postEvents({
-    ...events,
+    ...events.value,
     token: uni.getStorageSync('token') || ''
   })
   if (res.success) {
@@ -169,7 +167,6 @@ const post = async () => {
   init()
 }
 
-
 const init = () => {
   const year = now.year()
   const month = now.month() + 1 // 月份是从 0 开始的，所以需要加 1
@@ -184,8 +181,6 @@ const getTodayEvents = async () => {
   const currentYear = dayjs().format('YYYY')
   const currentMonth = dayjs().format('MM')
   const currentDay = dayjs().format('DD')
-  console.log('currentYear + \' \' + currentMonth + \' \' + currentDay')
-  console.log(currentYear + '-' + currentMonth + '-' + currentDay)
   api.getToday({
     day: currentYear + '-' + currentMonth + '-' + currentDay
   })
@@ -228,6 +223,11 @@ const showTomorrow = ref(false)
 const showFlagshowTomorrow = () => {
   showTomorrow.value = !showTomorrow.value
 }
+const changeMode = () => {
+  events.value = data.value
+  flag.value = 'add'
+}
+
 getWeather()
 init()
 </script>

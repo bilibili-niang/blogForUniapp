@@ -5,7 +5,7 @@ export const globalStore = defineStore(
   {
     state: () => {
       return {
-        activePage: '1'
+        activePage: '2'
       }
     },
     actions: {

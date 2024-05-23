@@ -1,18 +1,21 @@
 <script lang="ts">
-import {defineComponent} from 'vue'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: "userDetail"
+  name: 'userDetail'
 })
 </script>
 <script setup lang="ts">
-import {defineProps, computed, ref} from 'vue';
-import api, {baseUrl} from "@/utils/api";
+import { computed, ref } from 'vue'
+import api, { baseUrl } from '@/utils/api'
+import { useMemberStore } from '@/stores/index'
+import CustomButton from '@/components/common/customButton/index.vue'
 
+const memberStore = useMemberStore()
 const props = defineProps({
   data: {
     type: Object,
-    default: {name: '张三', age: 18}
+    default: { name: '张三', age: 18 }
   }
 })
 
@@ -20,43 +23,35 @@ const imgUrl = computed(() => {
   return baseUrl + props.data.avatar
 })
 // 弹窗
-const showPopup = ref(false);
+const showPopup = ref(false)
 const close = () => {
-  showPopup.value = !showPopup.value;
+  showPopup.value = !showPopup.value
 }
-// 退出登陆
-const logOut = () => {
-// 清除token
+// 退出登录
+const logOut = async () => {
   try {
-    uni.removeStorage({
-      key: 'user',
-      success: function (res) {
-        uni.showToast({
-          title: '退出登陆成功',
-          icon: 'success'
-        })
-        // 重启
-        setTimeout(() => {
-          uni.reLaunch({
-            url: '/pages/index/index'
-          })
-        }, 2000)
-      }
-    });
-
-    uni.removeStorage({
-      key: 'token',
-      success: function (res) {
-      }
-    });
-
-    uni.removeStorage({
-      key: 'member',
-      success: function (res) {
-      }
-    });
+    // 使用Promise.all确保所有清除操作完成后再进行下一步
+    await Promise.all([
+      uni.removeStorageSync('user'),
+      uni.removeStorageSync('token'),
+      uni.removeStorageSync('member')
+    ])
+    memberStore.clearProfile()
+    // 显示成功提示
+    uni.showToast({
+      title: '退出登录成功',
+      icon: 'none'
+    })
+    uni.reLaunch({
+      url: '/pages/mainContainer/index'
+    })
   } catch (e) {
-    console.log(e)
+    // 处理可能的异常情况
+    console.error('退出登录时发生错误:', e)
+    uni.showToast({
+      title: '退出登录失败，请重试',
+      icon: 'none'
+    })
   }
 }
 
@@ -64,11 +59,11 @@ const logOut = () => {
 const beAdmin = async () => {
   await api.becomeAdmin()
       .then(res => {
-        console.log("res:")
+        console.log('res:')
         console.log(res)
       })
       .catch(e => {
-        console.log("e:")
+        console.log('e:')
         console.log(e)
       })
 }
@@ -99,7 +94,7 @@ const avatarClick = () => {
   uni.previewImage({
     current: 0,
     urls: [imgUrl.value]
-  });
+  })
 }
 
 </script>
@@ -129,7 +124,9 @@ const avatarClick = () => {
 
       <div class="ice-row-reverse bottom-themeColor">
         <div class="ice-row">
-          <u-button class="btnWidth" text="设置" @click="showPopup = true"></u-button>
+          <CustomButton @click="showPopup = true">
+            设置
+          </CustomButton>
         </div>
       </div>
     </div>
@@ -139,24 +136,19 @@ const avatarClick = () => {
     <view>
       <div class="ice-column alignEnd margin-lr-10">
         <div class="ice-row margin-bottom-s">
-          <u-button class="btnWidth" text="退出登陆" @click="logOut"></u-button>
+          <CustomButton @click="logOut">
+            退出登录
+          </CustomButton>
         </div>
-        <!-- <div class="ice-row margin-bottom-s">
-                  <u-button class="btnWidth" text="成为admin" @click="beAdmin"></u-button>
-                </div>
-                <div class="ice-row margin-bottom-s">
-                  <u-button class="btnWidth" text="绑定账户" @click="bindWebAccount"></u-button>
-                </div>-->
 
         <div class="ice-row margin-bottom-s">
-          <u-button class="btnWidth" text="修改信息" @click="changeUserInfo"></u-button>
+          <CustomButton @click="changeUserInfo">
+            修改信息
+          </CustomButton>
         </div>
-
       </div>
     </view>
   </u-popup>
-
-
 </template>
 
 <style scoped lang="less">

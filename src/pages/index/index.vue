@@ -2,12 +2,14 @@
   <div class="indexPage">
     <div class="ice-column" v-if="!userInfo">
       请前往登陆
-      <u-button text="登陆页" @click="goLogin"></u-button>
+      <CustomButton @click="goLogin">
+        登陆页
+      </CustomButton>
     </div>
     <div class="ice-column" v-else>
       <div class="ice-column" v-if="userInfo">
         统计概览
-statistics
+        statistics
 
       </div>
     </div>
@@ -17,24 +19,26 @@ statistics
 </template>
 
 <script setup lang="ts">
-import { useMemberStore } from '@/stores'
+import { globalStore, useMemberStore } from '@/stores'
 import { ref } from 'vue'
+import CustomButton from '@/components/common/customButton/index.vue'
 
 const memberStore = useMemberStore()
 const userInfo = ref(memberStore.$state.profile || '')
 if (memberStore.$state.profile) {
   uni.showTabBar()
 }
+
+const global = globalStore()
 const goLogin = () => {
-  uni.switchTab({
+  /*uni.switchTab({
     url: '/pages/mine/index'
-  })
+  })*/
+  global.changePage('4')
 }
 </script>
 
 <style scoped lang="less">
-.indexPage {
-}
 
 .list {
   display: grid;

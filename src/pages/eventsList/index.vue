@@ -27,7 +27,6 @@
                    v-if="item.tag3.length>0"></u-tag>
           </div>
         </div>
-        <hr>
       </div>
     </div>
   </div>

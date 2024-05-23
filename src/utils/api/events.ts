@@ -30,7 +30,14 @@ export default {
       method: 'POST',
       data
     })
+  },
+  // 删除
+  async deleteEvent(id: string) {
+    return http<String[]>({
+      url: '/api/events/deleteEvent',
+      method: 'POST',
+      data: { id }
+    })
   }
-
 
 }

@@ -1,11 +1,8 @@
 <template>
   <view class="mine">
-    <div class="ice-column" v-if="userInfo">
-      <userDetail :data="userInfo"/>
-      <div class="columnBlock"></div>
-    </div>
+    <userDetail :data="userInfo" v-if="userInfo"/>
     <!--没有用户登陆时-->
-    <div class="ice-column" v-if="!userInfo">
+    <div class="ice-column" v-else>
       <!--使用账户密码登陆-->
       <div v-if="!isWeixin">
         <uni-easyinput v-model="accountForm.username" placeholder="账户"></uni-easyinput>
@@ -19,7 +16,9 @@
       <div class="column justC" v-else>
         <up-text text="通过微信登录"></up-text>
         <div class="blockLine"></div>
-        <up-button class="mainBtn" text="登录" @click="login" :disabled="allowClick"></up-button>
+        <CustomButton :disabled="allowClick" @click="login">
+          登录
+        </CustomButton>
       </div>
     </div>
 
@@ -27,13 +26,14 @@
 </template>
 
 <script setup lang="ts">
-import {computed, ref} from "vue";
-import api from "@/utils/api";
-import verifyTools from '@/utils/verify/index.js'
-import {useMemberStore} from '@/stores/index'
+import { ref } from 'vue'
+import api from '@/utils/api'
+import verifyTools from '@/utils/verify'
+import { useMemberStore } from '@/stores/index'
 import userDetail from './src/userDetail/index.vue'
+import CustomButton from '@/components/common/customButton/index.vue'
 
-const memberStore = useMemberStore();
+const memberStore = useMemberStore()
 
 let code = ref()
 
@@ -43,7 +43,7 @@ const userInfo = ref()
 const login = () => {
   allowClick.value = true
   uni.login({
-    provider: 'weixin', //使用微信登录
+    provider: 'weixin',
     onlyAuthorize: true,
     success: async function (loginRes) {
       allowClick.value = false
@@ -60,19 +60,17 @@ const login = () => {
         uni.showTabBar()
         uni.showToast({
           title: '登录成功',
-          icon: 'success'
+          icon: 'none'
         })
       } else {
         uni.showToast({
           title: '登录失败',
-          icon: 'error'
+          icon: 'none'
         })
       }
     },
     fail: function (err) {
       allowClick.value = false
-      console.log('err')
-      console.log(err);
     }
   })
 }
@@ -83,7 +81,7 @@ let accountForm = ref({
 })
 
 // 控制是否可以点击登录
-let allowClick = ref(false);
+let allowClick = ref(false)
 // 账户密码登陆
 const accountbyLogin = () => {
   const verifyRes = verifyTools.commonVerify({
@@ -130,47 +128,29 @@ const accountbyLogin = () => {
 }
 
 
-// 通过本地token登录，登录成功将数据写入pinia
+// 通过openId重新获取token
 const loginByToken = async () => {
-  try {
-    // 从localStorage中获取token
-    let tokenStr = ""
-    uni.getStorage({
-      key: 'token',
-      success: async function (res) {
-        tokenStr = res.data + '';
-        if (tokenStr) {
-          // 假设这里有一个函数getUserInfoByToken用于通过token获取用户信息
-          const data = await api.getUserInfoByToken(tokenStr);
-          userInfo.value = data.result.res;
-          // 写入pinia
-          memberStore.setProfile(data.result.res)
-        }
-
-        // 显示
-        uni.showTabBar()
-      }
-    });
-  } catch (e) {
-    console.log(e)
-  }
+  uni.getStorage({
+    key: 'token',
+    success: async function (res) {
+      res.data ? login() : ''
+    }
+  })
 }
 
-loginByToken();
+loginByToken()
 
 // 存储登陆方式
-const isWeixin = ref(false);
+const isWeixin = ref(false)
 // #ifdef MP-WEIXIN
-console.log("微信平台")
-isWeixin.value = true;
+console.log('微信平台')
+isWeixin.value = true
 // #endif
-const loginState = computed(() => {
-  return !!uni.getStorageSync('token')
-})
+
 </script>
 
 <style scoped lang="less">
-.mine{
+.mine {
   padding: @padding-m;
 }
 

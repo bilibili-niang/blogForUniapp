@@ -1,41 +1,41 @@
-import {defineStore} from 'pinia'
-import {ref} from 'vue'
-import type {userLoginInfo} from "@/types/data";
+import { defineStore } from 'pinia'
+import { ref } from 'vue'
+import type { userLoginInfo } from '@/types/data'
 
 // 定义 Store
 export const useMemberStore = defineStore(
-    'member',
-    () => {
-        // 会员信息
-        const profile = ref<userLoginInfo>()
-        // 保存会员信息，登录时使用
-        const setProfile = (val: userLoginInfo) => {
-            profile.value = val
-        }
-        // 清理会员信息，退出时使用
-        const clearProfile = () => {
-            profile.value = undefined
-        }
-        // 记得 return
-        return {
-            profile,
-            setProfile,
-            clearProfile,
-        }
-    },
-    {
-        // 网页端配置
-        // persist: true,
-        // 小程序端配置
-        persist: {
-            storage: {
-                getItem(key) {
-                    return uni.getStorageSync(key)
-                },
-                setItem(key, value) {
-                    uni.setStorageSync(key, value)
-                },
-            },
+  'member',
+  () => {
+    // 会员信息
+    const profile = ref<userLoginInfo | null>(null)
+    // 保存用户信息，登录时使用
+    const setProfile = (val: userLoginInfo) => {
+      profile.value = val
+    }
+    // 清理用户信息，退出时使用
+    const clearProfile = () => {
+      profile.value = null
+    }
+    // 记得 return
+    return {
+      profile,
+      setProfile,
+      clearProfile,
+    }
+  },
+  {
+    // 网页端配置
+    // persist: true,
+    // 小程序端配置
+    persist: {
+      storage: {
+        getItem(key) {
+          return uni.getStorageSync(key)
         },
+        setItem(key, value) {
+          uni.setStorageSync(key, value)
+        },
+      },
     },
+  },
 )
